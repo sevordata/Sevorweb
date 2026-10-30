@@ -2,7 +2,7 @@
    If you change BASE_URL (no trailing slash), also run ./set-base-url.sh to update sitemap.xml,
    robots.txt and the <head> meta tags (they are static HTML for SEO). */
 window.SEVOR_CONFIG = {
-  BASE_URL: "https://sevordata.github.io/Sevorweb",
+  BASE_URL: "https://sevordata.dev.ar",
   EMAIL: "contacto.sevor@gmail.com",
   // FormSubmit endpoint. After the one-time activation you may replace the
   // email with the random alias FormSubmit gives you, to hide the address.

@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /Sevorweb/gracias.html
+Disallow: /gracias.html
 
-Sitemap: https://sevordata.github.io/Sevorweb/sitemap.xml
+Sitemap: https://sevordata.dev.ar/sitemap.xml
