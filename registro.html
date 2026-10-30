@@ -5,211 +5,312 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Registro de contratistas | SEVOR Data</title>
   <meta name="description" content="Registrate como entrenador de IA independiente en Argentina: grabación de video POV y evaluación de contenido generado por IA. Trabajo flexible, nunca cobramos por sumarte.">
-  <meta name="theme-color" content="#05070f">
+  <meta name="theme-color" content="#f6f6f3">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://sevordata.dev.ar/registro.html">
+  <link rel="canonical" href="https://sevordata.github.io/Sevorweb/registro.html">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="SEVOR Data">
   <meta property="og:title" content="Trabajá como entrenador de IA | SEVOR Data">
   <meta property="og:description" content="Grabación POV y evaluación de IA desde tu casa, como contratista independiente en Argentina.">
-  <meta property="og:url" content="https://sevordata.dev.ar/registro.html">
-  <meta property="og:image" content="https://sevordata.dev.ar/assets/img/og-image.png">
+  <meta property="og:url" content="https://sevordata.github.io/Sevorweb/registro.html">
+  <meta property="og:image" content="https://sevordata.github.io/Sevorweb/assets/img/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="es_AR">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://sevordata.github.io/Sevorweb/assets/img/og-image.png">
+
+  <script>document.documentElement.classList.add("js");</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600&family=Instrument+Serif:ital@0;1&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600&family=Instrument+Serif:ital@0;1&display=swap"></noscript>
   <link rel="stylesheet" href="assets/css/style.css">
-  <script src="assets/js/config.js"></script>
-  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/config.js" defer></script>
+  <script src="assets/js/i18n.js" defer></script>
   <script src="assets/js/main.js" defer></script>
   <script src="assets/js/contract.js" defer></script>
   <script src="assets/js/registro.js" defer></script>
 </head>
-<body data-page="registro">
+<body id="top" data-page="registro">
   <a class="skip" href="#main" data-i18n="skip">Saltar al contenido</a>
-  <header class="site-header solid">
-    <nav class="wrap nav" aria-label="Principal">
-      <a class="brand" href="./" aria-label="SEVOR Data">
-        <img src="favicon.svg" alt="" width="30" height="30">
-        <span class="word">SEVOR <b>Data</b></span>
-      </a>
-      <div class="nav-right">
+  <header class="site-header" data-header>
+    <div class="container header-inner">
+      <a class="brand" href="./" aria-label="SEVOR Data"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#0c0e12"/><circle cx="16" cy="16" r="7.25" fill="none" stroke="#fff" stroke-width="2.5"/><circle cx="16" cy="16" r="2.6" fill="#6cace4"/></svg><span class="brand-word">SEVOR<span>Data</span></span></a>
+      <div class="header-actions">
         <div class="lang">
-          <button class="lang-btn" type="button" aria-haspopup="menu" aria-expanded="false" data-i18n-attr="aria-label:lang.label">
-            <span class="lang-flag" aria-hidden="true">🇦🇷</span><span class="lang-code">ES</span>
+          <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="lang-menu" data-i18n-attr="aria-label:lang.label" aria-label="Idioma">
+            <span class="flag"><svg viewBox="0 0 20 14" aria-hidden="true"><rect width="20" height="14" fill="#74acdf"/><rect y="4.67" width="20" height="4.66" fill="#fff"/><circle cx="10" cy="7" r="1.5" fill="#f6b40e"/></svg></span><span class="lang-code">ES</span><svg class="chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
           </button>
-          <div class="lang-menu" role="menu"></div>
+          <div class="lang-menu" id="lang-menu" role="menu"></div>
         </div>
-        <a class="btn btn-ghost btn-sm" href="./" data-i18n="reg.back">Volver al inicio</a>
+        <a class="btn btn-quiet btn-sm" href="./" data-i18n="reg.back">Volver al inicio</a>
       </div>
-    </nav>
+    </div>
   </header>
 
-  <main id="main" class="wrap">
-    <div class="page-top">
-      <p class="kicker" data-i18n="reg.kicker">Registro</p>
-      <h1 data-i18n="reg.title">Registro de contratistas</h1>
-      <p class="sub" data-i18n="reg.lead">Completá tus datos, leé y firmá el contrato, y envialo. Toma unos 10 minutos.</p>
-      <ol class="stepper" aria-label="Pasos">
-        <li class="active" data-step-ind="1"><span class="n">1</span><span data-i18n="reg.s1">Datos</span></li>
-        <li data-step-ind="2"><span class="n">2</span><span data-i18n="reg.s2">Contrato</span></li>
-        <li data-step-ind="3"><span class="n">3</span><span data-i18n="reg.s3">Enviar</span></li>
-      </ol>
+  <main id="main" class="reg-page">
+    <div class="container">
+      <header class="reg-head">
+        <p class="eyebrow" data-i18n="reg.kicker">Registro</p>
+        <h1 data-i18n="reg.title">Registro de contratistas</h1>
+        <p class="lead" data-i18n="reg.lead">Completá tus datos, leé y firmá el contrato, y envialo. Toma unos 10 minutos.</p>
+      </header>
+
+      <div class="grid-12 reg-layout">
+        <div class="reg-main">
+          <div class="form-card">
+            <header>
+              <p class="step-count" id="step-count" aria-live="polite">Paso 1 de 3</p>
+              <ol class="stepper" aria-label="Pasos">
+                <li class="active" data-step-ind="1" aria-current="step"><span class="bar"></span><span class="row"><span class="n">1</span><span class="t" data-i18n="reg.s1">Datos</span></span><span class="d" data-i18n="reg.s1.d">Tus datos y tu DNI</span></li>
+                <li data-step-ind="2"><span class="bar"></span><span class="row"><span class="n">2</span><span class="t" data-i18n="reg.s2">Contrato</span></span><span class="d" data-i18n="reg.s2.d">Leé y firmá</span></li>
+                <li data-step-ind="3"><span class="bar"></span><span class="row"><span class="n">3</span><span class="t" data-i18n="reg.s3">Enviar</span></span><span class="d" data-i18n="reg.s3.d">Revisá y enviá</span></li>
+              </ol>
+            </header>
+
+            <form id="reg" novalidate autocomplete="on">
+              <!-- STEP 1 -->
+              <section class="panel step-panel" data-step="1" aria-labelledby="s1h">
+                <h2 id="s1h" class="hp" data-i18n="reg.s1">Datos</h2>
+
+                <div class="group">
+                  <div class="group-head"><h3 data-i18n="g.personal">Datos personales</h3><p data-i18n="g.personal.d">Tal como figuran en tu DNI.</p></div>
+                  <div class="fields">
+                    <div class="field full">
+                      <label for="name" data-i18n="f.name">Nombre y apellido completo</label>
+                      <input id="name" name="name" type="text" autocomplete="name" required maxlength="120" aria-describedby="err-name">
+                      <span class="err" id="err-name" data-err="name"></span>
+                    </div>
+                    <div class="field full">
+                      <label for="email" data-i18n="f.email">Email</label>
+                      <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="120" aria-describedby="h-email err-email">
+                      <span class="hint" id="h-email" data-i18n="f.email.h">Te escribimos a esta dirección.</span>
+                      <span class="err" id="err-email" data-err="email"></span>
+                    </div>
+                    <div class="field">
+                      <label for="cuit" data-i18n="f.cuit">CUIT</label>
+                      <input id="cuit" name="cuit" type="text" inputmode="numeric" autocomplete="off" required maxlength="13" placeholder="20123456789" aria-describedby="h-cuit err-cuit">
+                      <span class="hint" id="h-cuit" data-i18n="f.cuit.h">11 dígitos, sin guiones.</span>
+                      <span class="err" id="err-cuit" data-err="cuit"></span>
+                    </div>
+                    <div class="field">
+                      <label for="dni" data-i18n="f.dni">Número de DNI</label>
+                      <input id="dni" name="dni" type="text" inputmode="numeric" autocomplete="off" required maxlength="10" aria-describedby="h-dni err-dni">
+                      <span class="hint" id="h-dni" data-i18n="f.dni.h">7 u 8 dígitos, sin puntos.</span>
+                      <span class="err" id="err-dni" data-err="dni"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="group-head"><h3 data-i18n="g.location">Ubicación</h3><p data-i18n="g.location.d">Dónde vas a trabajar.</p></div>
+                  <div class="fields">
+                    <div class="field">
+                      <label for="provincia" data-i18n="f.prov">Provincia</label>
+                      <select id="provincia" name="provincia" required aria-describedby="err-provincia">
+                        <option value="" data-i18n="f.prov.ph">Elegí tu provincia</option>
+                      </select>
+                      <span class="err" id="err-provincia" data-err="provincia"></span>
+                    </div>
+                    <div class="field">
+                      <label for="ciudad" data-i18n="f.city">Ciudad</label>
+                      <input id="ciudad" name="ciudad" type="text" autocomplete="address-level2" required maxlength="80" aria-describedby="err-ciudad">
+                      <span class="err" id="err-ciudad" data-err="ciudad"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="group-head"><h3 data-i18n="g.work">Equipo y disponibilidad</h3><p data-i18n="g.work.d">Nos ayuda a asignarte el proyecto adecuado.</p></div>
+                  <div class="fields">
+                    <div class="field">
+                      <label for="dispositivo" data-i18n="f.device">Dispositivo para trabajar</label>
+                      <select id="dispositivo" name="dispositivo" required aria-describedby="err-dispositivo">
+                        <option value="" data-i18n="f.device.ph">Elegí una opción</option>
+                        <option value="Samsung Galaxy S21 o superior">Samsung Galaxy S21+</option>
+                        <option value="Google Pixel 6 o superior">Google Pixel 6+</option>
+                        <option value="iPhone 12 o superior">iPhone 12+</option>
+                        <option value="Otro celular" data-i18n="dev.other">Otro celular</option>
+                        <option value="Computadora" data-i18n="dev.pc">Computadora</option>
+                      </select>
+                      <span class="err" id="err-dispositivo" data-err="dispositivo"></span>
+                    </div>
+                    <div class="field">
+                      <label for="modelo" data-i18n="f.model">Modelo exacto</label>
+                      <input id="modelo" name="modelo" type="text" required maxlength="80" data-i18n-attr="placeholder:f.model.ph" aria-describedby="err-modelo">
+                      <span class="err" id="err-modelo" data-err="modelo"></span>
+                    </div>
+                    <fieldset class="field full">
+                      <legend data-i18n="f.strap">¿Tenés vincha o soporte de cabeza para el celular?</legend>
+                      <div class="choices" style="margin-top:.375rem">
+                        <label class="choice"><input type="radio" name="vincha" value="Sí" required><span data-i18n="yes">Sí</span></label>
+                        <label class="choice"><input type="radio" name="vincha" value="No"><span data-i18n="no">No</span></label>
+                      </div>
+                      <span class="err" data-err="vincha"></span>
+                    </fieldset>
+                    <fieldset class="field full">
+                      <legend data-i18n="f.role">Rol</legend>
+                      <div class="choices" style="margin-top:.375rem">
+                        <label class="choice"><input type="radio" name="rol" value="Grabador POV" required><span data-i18n="role.pov">Grabador POV</span></label>
+                        <label class="choice"><input type="radio" name="rol" value="Evaluador IA"><span data-i18n="role.eval">Evaluador IA</span></label>
+                        <label class="choice"><input type="radio" name="rol" value="Ambos"><span data-i18n="role.both">Ambos</span></label>
+                      </div>
+                      <span class="err" data-err="rol"></span>
+                    </fieldset>
+                    <div class="field">
+                      <label for="horas" data-i18n="f.hours">Horas por semana disponibles</label>
+                      <input id="horas" name="horas" type="number" inputmode="numeric" min="1" max="80" step="1" required aria-describedby="h-horas err-horas">
+                      <span class="hint" id="h-horas" data-i18n="f.hours.h">Entre 1 y 80.</span>
+                      <span class="err" id="err-horas" data-err="horas"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="group-head"><h3 data-i18n="g.docs">Documento de identidad</h3><p data-i18n="g.docs.d">Fotos nítidas del frente y del dorso. Las comprimimos en tu dispositivo a menos de 1 MB.</p></div>
+                  <div class="fields">
+                    <div class="field">
+                      <span class="label-like" id="dniF-l" data-i18n="f.dniF">Foto del DNI (frente)</span>
+                      <label class="drop" data-drop="dniF">
+                        <input type="file" id="dniF" accept="image/*" required aria-labelledby="dniF-l">
+                        <span class="thumb" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M14 10h4M14 14h4M6 16h6"/></svg></span>
+                        <span class="meta"><b data-i18n="f.file.types">JPG o PNG</b><span data-status="dniF" aria-live="polite"></span></span>
+                        <span class="pick" aria-hidden="true"><span class="when-empty" data-i18n="f.file.cta">Elegir foto</span><span class="when-has" data-i18n="f.file.change">Cambiar foto</span></span>
+                      </label>
+                      <span class="err" data-err="dniF"></span>
+                    </div>
+                    <div class="field">
+                      <span class="label-like" id="dniB-l" data-i18n="f.dniB">Foto del DNI (dorso)</span>
+                      <label class="drop" data-drop="dniB">
+                        <input type="file" id="dniB" accept="image/*" required aria-labelledby="dniB-l">
+                        <span class="thumb" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M6 9h12M6 12h12M6 15h8"/></svg></span>
+                        <span class="meta"><b data-i18n="f.file.types">JPG o PNG</b><span data-status="dniB" aria-live="polite"></span></span>
+                        <span class="pick" aria-hidden="true"><span class="when-empty" data-i18n="f.file.cta">Elegir foto</span><span class="when-has" data-i18n="f.file.change">Cambiar foto</span></span>
+                      </label>
+                      <span class="err" data-err="dniB"></span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="actions">
+                  <span class="spacer"></span>
+                  <button type="button" class="btn btn-primary" data-next="2"><span data-i18n="f.next">Continuar</span><svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+                </div>
+              </section>
+
+              <!-- STEP 2 -->
+              <section class="panel step-panel" data-step="2" hidden aria-labelledby="s2h">
+                <h2 id="s2h" class="panel-title" data-i18n="reg.s2">Contrato</h2>
+                <p class="muted small" data-i18n="c.intro">Leé el contrato completo. Ya completamos tus datos y la fecha de hoy.</p>
+                <div class="doc">
+                  <div class="doc-bar"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 1.8H4.2a1.2 1.2 0 0 0-1.2 1.2v10a1.2 1.2 0 0 0 1.2 1.2h7.6a1.2 1.2 0 0 0 1.2-1.2V5.3z"/><path d="M9.5 1.8v3.5H13M5.5 8.5h5M5.5 11h3.5"/></svg><span class="t" data-i18n="c.doc">Contrato de locación de servicios</span><span class="mono">ES-AR</span></div>
+                  <div class="doc-progress" aria-hidden="true"><i id="doc-progress"></i></div>
+                  <div class="contract-box" id="contract" tabindex="0" lang="es-AR" role="document" aria-labelledby="s2h"></div>
+                  <p class="doc-foot"><span data-i18n="c.langnote">El contrato está en español, que es su versión válida según la ley argentina.</span> <span data-i18n="c.scroll">Desplazate para leer el contrato completo.</span></p>
+                </div>
+                <label class="check"><input type="checkbox" id="accept"><span data-i18n="c.accept">Leí y acepto el contrato</span></label>
+                <span class="err" data-err="accept"></span>
+
+                <div class="sigwrap" id="sigwrap">
+                  <div class="sig-head">
+                    <span class="label-like" id="sig-l" data-i18n="c.sign">Tu firma</span>
+                    <div class="sig-tools">
+                      <button type="button" class="btn btn-quiet btn-sm" id="sigundo" data-i18n="c.undo">Deshacer</button>
+                      <button type="button" class="btn btn-quiet btn-sm" id="sigclear" data-i18n="c.clear">Borrar firma</button>
+                    </div>
+                  </div>
+                  <div class="sig-frame">
+                    <canvas class="sigpad" id="sigpad" role="img" aria-labelledby="sig-l"></canvas>
+                    <span class="sig-placeholder" aria-hidden="true" data-i18n="c.sign.h">Firmá con el dedo o el mouse dentro del recuadro.</span>
+                  </div>
+                  <span class="note" data-i18n="c.sign.h">Firmá con el dedo o el mouse dentro del recuadro.</span>
+                  <span class="err" data-err="sign"></span>
+                </div>
+
+                <div class="actions">
+                  <button type="button" class="btn btn-secondary" data-prev="1" data-i18n="f.prev">Atrás</button>
+                  <span class="spacer"></span>
+                  <button type="button" class="btn btn-primary" data-next="3"><span data-i18n="f.next">Continuar</span><svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+                </div>
+              </section>
+
+              <!-- STEP 3 -->
+              <section class="panel step-panel" data-step="3" hidden aria-labelledby="s3h">
+                <h2 id="s3h" class="panel-title" data-i18n="s3.title">Revisá y enviá</h2>
+                <p class="muted small" style="margin-bottom:var(--sp-3)" data-i18n="s3.summary">Resumen</p>
+                <div class="summary-groups" id="summary"></div>
+                <label class="check"><input type="checkbox" id="privacy"><span data-i18n="s3.privacy">Acepto que SEVOR Data trate mis datos personales…</span></label>
+                <span class="err" data-err="privacy"></span>
+                <p class="callout" style="margin-top:var(--sp-3)"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="12" height="8.5" rx="2"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9"/></svg><span data-i18n="s3.note">Generamos en tu dispositivo un PDF…</span></p>
+                <p class="status" id="status" role="status" aria-live="polite"></p>
+                <div class="actions">
+                  <button type="button" class="btn btn-secondary" data-prev="2" data-i18n="f.prev">Atrás</button>
+                  <span class="spacer"></span>
+                  <button type="button" class="btn btn-secondary" id="dlpdf" data-i18n="s3.download">Descargar mi copia en PDF</button>
+                  <button type="button" class="btn btn-primary" id="submit"><span data-i18n="s3.submit">Enviar registro</span></button>
+                </div>
+              </section>
+            </form>
+          </div>
+
+          <!-- Real form posted to FormSubmit (filled by registro.js) -->
+          <form id="fs" method="POST" enctype="multipart/form-data" hidden></form>
+        </div>
+
+        <aside class="reg-aside" aria-labelledby="aside-t">
+          <div class="aside-card">
+            <h2 id="aside-t" data-i18n="aside.title">Antes de empezar</h2>
+            <ul class="ticks">
+              <li data-i18n="aside.1">Tu DNI a mano (frente y dorso)</li>
+              <li data-i18n="aside.2">Tu CUIT</li>
+              <li data-i18n="aside.3">Unos 10 minutos</li>
+            </ul>
+          </div>
+          <p class="callout is-warn"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.2 17.6 16H2.4z"/><path d="M10 8v3.6M10 13.8h.01"/></svg><span data-i18n="work.b3">Nunca cobramos por sumarte ni por acceder a proyectos.</span></p>
+          <p class="callout"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="12" height="8.5" rx="2"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9"/></svg><span data-i18n="aside.privacy">Usamos tus datos solo para gestionar el contrato, verificar tu identidad y facturar (Ley 25.326).</span></p>
+        </aside>
+      </div>
     </div>
-
-    <form id="reg" novalidate autocomplete="on">
-      <!-- STEP 1 -->
-      <section class="glass panel" data-step="1" aria-labelledby="s1h">
-        <h2 id="s1h" class="hp" data-i18n="reg.s1">Datos</h2>
-        <div class="fields">
-          <div class="field full">
-            <label for="name" data-i18n="f.name">Nombre y apellido completo</label>
-            <input id="name" name="name" type="text" autocomplete="name" required maxlength="120">
-            <span class="err" data-err="name"></span>
-          </div>
-          <div class="field">
-            <label for="email" data-i18n="f.email">Email</label>
-            <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="120">
-            <span class="err" data-err="email"></span>
-          </div>
-          <div class="field">
-            <label for="cuit" data-i18n="f.cuit">CUIT</label>
-            <input id="cuit" name="cuit" type="text" inputmode="numeric" autocomplete="off" required maxlength="13" placeholder="20123456789">
-            <span class="hint" data-i18n="f.cuit.h">11 dígitos, sin guiones.</span>
-            <span class="err" data-err="cuit"></span>
-          </div>
-          <div class="field">
-            <label for="dni" data-i18n="f.dni">Número de DNI</label>
-            <input id="dni" name="dni" type="text" inputmode="numeric" autocomplete="off" required maxlength="10">
-            <span class="err" data-err="dni"></span>
-          </div>
-          <div class="field">
-            <label for="provincia" data-i18n="f.prov">Provincia</label>
-            <select id="provincia" name="provincia" required>
-              <option value="" data-i18n="f.prov.ph">Elegí tu provincia</option>
-            </select>
-            <span class="err" data-err="provincia"></span>
-          </div>
-          <div class="field">
-            <label for="ciudad" data-i18n="f.city">Ciudad</label>
-            <input id="ciudad" name="ciudad" type="text" autocomplete="address-level2" required maxlength="80">
-            <span class="err" data-err="ciudad"></span>
-          </div>
-          <div class="field">
-            <label for="dispositivo" data-i18n="f.device">Dispositivo para trabajar</label>
-            <select id="dispositivo" name="dispositivo" required>
-              <option value="" data-i18n="f.device.ph">Elegí una opción</option>
-              <option value="Samsung Galaxy S21 o superior">Samsung Galaxy S21+</option>
-              <option value="Google Pixel 6 o superior">Google Pixel 6+</option>
-              <option value="iPhone 12 o superior">iPhone 12+</option>
-              <option value="Otro celular" data-i18n="dev.other">Otro celular</option>
-              <option value="Computadora" data-i18n="dev.pc">Computadora</option>
-            </select>
-            <span class="err" data-err="dispositivo"></span>
-          </div>
-          <div class="field">
-            <label for="modelo" data-i18n="f.model">Modelo exacto</label>
-            <input id="modelo" name="modelo" type="text" required maxlength="80" data-i18n-attr="placeholder:f.model.ph">
-            <span class="err" data-err="modelo"></span>
-          </div>
-          <fieldset class="field">
-            <legend data-i18n="f.strap">¿Tenés vincha o soporte de cabeza para el celular?</legend>
-            <div class="choices">
-              <label class="choice"><input type="radio" name="vincha" value="Sí" required><span data-i18n="yes">Sí</span></label>
-              <label class="choice"><input type="radio" name="vincha" value="No"><span data-i18n="no">No</span></label>
-            </div>
-            <span class="err" data-err="vincha"></span>
-          </fieldset>
-          <div class="field">
-            <label for="horas" data-i18n="f.hours">Horas por semana disponibles</label>
-            <input id="horas" name="horas" type="number" inputmode="numeric" min="1" max="80" step="1" required>
-            <span class="err" data-err="horas"></span>
-          </div>
-          <fieldset class="field full">
-            <legend data-i18n="f.role">Rol</legend>
-            <div class="choices">
-              <label class="choice"><input type="radio" name="rol" value="Grabador POV" required><span data-i18n="role.pov">Grabador POV</span></label>
-              <label class="choice"><input type="radio" name="rol" value="Evaluador IA"><span data-i18n="role.eval">Evaluador IA</span></label>
-              <label class="choice"><input type="radio" name="rol" value="Ambos"><span data-i18n="role.both">Ambos</span></label>
-            </div>
-            <span class="err" data-err="rol"></span>
-          </fieldset>
-          <div class="field">
-            <span class="label-like" style="font-weight:600;font-size:.9rem" id="dniF-l" data-i18n="f.dniF">Foto del DNI (frente)</span>
-            <label class="drop" data-drop="dniF">
-              <input type="file" id="dniF" accept="image/*" required aria-labelledby="dniF-l">
-              <span class="thumb"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M14 10h4M14 14h4M6 16h6"/></svg></span>
-              <span class="meta"><b data-i18n="f.dniF">Foto del DNI (frente)</b><span data-status="dniF" data-i18n="f.file.h">Imagen clara y legible.</span></span>
-            </label>
-            <span class="err" data-err="dniF"></span>
-          </div>
-          <div class="field">
-            <span class="label-like" style="font-weight:600;font-size:.9rem" id="dniB-l" data-i18n="f.dniB">Foto del DNI (dorso)</span>
-            <label class="drop" data-drop="dniB">
-              <input type="file" id="dniB" accept="image/*" required aria-labelledby="dniB-l">
-              <span class="thumb"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M6 9h12M6 12h12M6 15h8"/></svg></span>
-              <span class="meta"><b data-i18n="f.dniB">Foto del DNI (dorso)</b><span data-status="dniB" data-i18n="f.file.h">Imagen clara y legible.</span></span>
-            </label>
-            <span class="err" data-err="dniB"></span>
-          </div>
-        </div>
-        <div class="actions">
-          <span class="spacer"></span>
-          <button type="button" class="btn btn-primary" data-next="2" data-i18n="f.next">Continuar</button>
-        </div>
-      </section>
-
-      <!-- STEP 2 -->
-      <section class="glass panel" data-step="2" hidden aria-labelledby="s2h">
-        <h2 id="s2h" class="hp" data-i18n="reg.s2">Contrato</h2>
-        <p class="sub" style="margin:0 0 6px" data-i18n="c.intro">Leé el contrato completo. Ya completamos tus datos y la fecha de hoy.</p>
-        <p class="note" style="margin:0 0 14px" data-i18n="c.langnote">El contrato está en español, que es su versión válida según la ley argentina.</p>
-        <div class="contract-box" id="contract" tabindex="0" lang="es-AR"></div>
-        <label class="check"><input type="checkbox" id="accept"><span data-i18n="c.accept">Leí y acepto el contrato</span></label>
-        <span class="err" data-err="accept"></span>
-        <div class="sigwrap" id="sigwrap">
-          <p style="font-weight:600;margin:0 0 4px" data-i18n="c.sign">Tu firma</p>
-          <canvas class="sigpad" id="sigpad" aria-label="Firma" role="img"></canvas>
-          <div class="sigbar">
-            <span class="note" style="margin:0" data-i18n="c.sign.h">Firmá con el dedo o el mouse dentro del recuadro.</span>
-            <button type="button" class="btn btn-ghost btn-sm" id="sigclear" data-i18n="c.clear">Borrar firma</button>
-          </div>
-          <span class="err" data-err="sign"></span>
-        </div>
-        <div class="actions">
-          <button type="button" class="btn btn-ghost" data-prev="1" data-i18n="f.prev">Atrás</button>
-          <button type="button" class="btn btn-primary" data-next="3" data-i18n="f.next">Continuar</button>
-        </div>
-      </section>
-
-      <!-- STEP 3 -->
-      <section class="glass panel" data-step="3" hidden aria-labelledby="s3h">
-        <h2 id="s3h" style="font-size:1.4rem;margin-bottom:18px" data-i18n="s3.title">Revisá y enviá</h2>
-        <h3 style="font-size:1rem;color:var(--muted);margin-bottom:10px" data-i18n="s3.summary">Resumen</h3>
-        <dl class="summary" id="summary"></dl>
-        <label class="check"><input type="checkbox" id="privacy"><span data-i18n="s3.privacy">Acepto que SEVOR Data trate mis datos personales…</span></label>
-        <span class="err" data-err="privacy"></span>
-        <p class="note" data-i18n="s3.note">Generamos en tu dispositivo un PDF…</p>
-        <div class="actions">
-          <button type="button" class="btn btn-ghost" data-prev="2" data-i18n="f.prev">Atrás</button>
-          <span class="spacer"></span>
-          <button type="button" class="btn btn-ghost" id="dlpdf" data-i18n="s3.download">Descargar mi copia en PDF</button>
-          <button type="button" class="btn btn-primary" id="submit" data-i18n="s3.submit">Enviar registro</button>
-        </div>
-        <p class="status" id="status" role="status" aria-live="polite"></p>
-      </section>
-    </form>
-
-    <!-- Real form posted to FormSubmit (filled by registro.js) -->
-    <form id="fs" method="POST" enctype="multipart/form-data" hidden></form>
   </main>
 
   <footer class="site-footer">
-    <div class="wrap foot">
-      <div><strong>SEVOR Data</strong> · <span data-i18n="contact.loc">Bahía Blanca, Buenos Aires, Argentina</span></div>
-      <div><a href="mailto:contacto.sevor@gmail.com" data-email-text>contacto.sevor@gmail.com</a> · © <span id="year">2026</span> SEVOR Data</div>
+    <div class="container">
+      <div class="grid-12 foot-grid">
+        <div class="foot-brand">
+          <a class="brand" href="./" aria-label="SEVOR Data"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#0c0e12"/><circle cx="16" cy="16" r="7.25" fill="none" stroke="#fff" stroke-width="2.5"/><circle cx="16" cy="16" r="2.6" fill="#6cace4"/></svg><span class="brand-word">SEVOR<span>Data</span></span></a>
+          <p><span data-i18n="footer.stage">Proveedor en etapa inicial · capacidad de piloto</span><br><span data-i18n="contact.loc">Argentina</span></p>
+        </div>
+        <nav class="foot-col" aria-labelledby="f-company">
+          <h2 id="f-company" data-i18n="footer.company">Empresa</h2>
+          <ul>
+            <li><a href="./#servicios" data-i18n="nav.services">Servicios</a></li>
+            <li><a href="./#proceso" data-i18n="nav.process">Cómo trabajamos</a></li>
+            <li><a href="./#calidad" data-i18n="nav.quality">Calidad</a></li>
+            <li><a href="./#argentina" data-i18n="nav.why">Por qué Argentina</a></li>
+            <li><a href="./#contacto" data-i18n="footer.contact">Contacto</a></li>
+          </ul>
+        </nav>
+        <nav class="foot-col" aria-labelledby="f-work">
+          <h2 id="f-work" data-i18n="footer.work">Trabajar</h2>
+          <ul>
+            <li><a href="./#trabaja" data-i18n="nav.work">Trabajá con nosotros</a></li>
+            <li><a href="registro.html" data-i18n="footer.register">Registro de contratistas</a></li>
+          </ul>
+        </nav>
+        <div class="foot-col is-wide">
+          <h2 data-i18n="footer.legal">Legal y privacidad</h2>
+          <p data-i18n="footer.legal.d">Tratamos los datos personales conforme a la Ley 25.326 de Argentina. Podés pedir acceso, rectificación o supresión por email.</p>
+          <p><a class="link" href="mailto:contacto.sevor@gmail.com" data-email-text>contacto.sevor@gmail.com</a></p>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© <span id="year">2026</span> SEVOR Data. <span data-i18n="footer.rights">Todos los derechos reservados.</span></span>
+        <a class="to-top" href="#top" data-i18n="footer.top">Volver arriba</a>
+      </div>
     </div>
   </footer>
 </body>

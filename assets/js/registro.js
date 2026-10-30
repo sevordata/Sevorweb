@@ -33,7 +33,12 @@
     var el = $('[data-err="' + key + '"]');
     if (el) el.textContent = msgKey ? T(msgKey) : "";
     var field = el && el.closest(".field, .sigwrap");
-    if (field) field.classList.toggle("invalid", !!msgKey);
+    if (field) {
+      field.classList.toggle("invalid", !!msgKey);
+      field.querySelectorAll("input:not([type=file]), select").forEach(function (c) {
+        if (msgKey) c.setAttribute("aria-invalid", "true"); else c.removeAttribute("aria-invalid");
+      });
+    }
   }
   function refreshErrors() {
     Object.keys(state.errors).forEach(function (k) { setErr(k, state.errors[k]); });
@@ -129,19 +134,23 @@
   function bindFile(key) {
     var input = document.getElementById(key);
     var status = $('[data-status="' + key + '"]');
-    var thumb = $('[data-drop="' + key + '"] .thumb');
+    var drop = $('[data-drop="' + key + '"]');
+    var thumb = $(".thumb", drop);
     input.addEventListener("change", async function () {
       var file = input.files && input.files[0];
       state.images[key] = null;
       thumb.classList.remove("has"); thumb.style.backgroundImage = "";
-      if (!file) return;
+      drop.classList.remove("has-file");
+      if (!file) { status.textContent = ""; return; }
       status.removeAttribute("data-i18n");
+      drop.classList.add("is-busy");
       status.textContent = T("st.compress");
       try {
         var r = await compress(file);
         state.images[key] = r;
         thumb.classList.add("has");
         thumb.style.backgroundImage = "url(" + URL.createObjectURL(r.blob) + ")";
+        drop.classList.add("has-file");
         status.textContent = "✓ " + T("st.ready") + " · " + fmtSize(r.blob.size);
         status.dataset.size = r.blob.size;
         setErr(key, null);
@@ -149,6 +158,7 @@
         status.textContent = "";
         setErr(key, "err.img");
       }
+      drop.classList.remove("is-busy");
     });
   }
 
@@ -164,7 +174,7 @@
     }
     function style() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.strokeStyle = "#0b1a3a"; ctx.lineWidth = 2.4;
+      ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.strokeStyle = "#0c1a33"; ctx.lineWidth = 2.2;
     }
     function drawStroke(s) {
       if (!s.length) return;
@@ -200,6 +210,7 @@
     var api = {
       size: size,
       clear: function () { strokes = []; redraw(); api.onchange && api.onchange(); },
+      undo: function () { strokes.pop(); redraw(); api.onchange && api.onchange(); },
       isEmpty: function () {
         var n = 0; strokes.forEach(function (s) { n += s.length; }); return n < 8;
       },
@@ -227,18 +238,32 @@
   function formatCUIT(c) { return c.length === 11 ? c.slice(0, 2) + "-" + c.slice(2, 10) + "-" + c.slice(10) : c; }
 
   /* ---------- steps ---------- */
+  function stepCount() {
+    var sc = document.getElementById("step-count");
+    if (sc) sc.textContent = T("reg.stepof").replace("{n}", state.step);
+  }
+  function docProgress() {
+    var box = document.getElementById("contract"), bar = document.getElementById("doc-progress");
+    if (!box || !bar) return;
+    var max = box.scrollHeight - box.clientHeight;
+    bar.style.width = (max > 0 ? Math.min(100, (box.scrollTop / max) * 100) : 100) + "%";
+  }
   function go(n) {
     state.step = n;
+    stepCount();
     $$("[data-step]").forEach(function (s) { s.hidden = String(n) !== s.getAttribute("data-step"); });
     $$("[data-step-ind]").forEach(function (li) {
       var i = Number(li.getAttribute("data-step-ind"));
       li.classList.toggle("active", i === n); li.classList.toggle("done", i < n);
       if (i === n) li.setAttribute("aria-current", "step"); else li.removeAttribute("aria-current");
     });
-    if (n === 2) { renderContract(); requestAnimationFrame(function () { pad.size(); }); }
+    if (n === 2) { renderContract(); requestAnimationFrame(function () { pad.size(); docProgress(); }); }
     if (n === 3) renderSummary();
-    var top = $(".stepper");
-    if (top) window.scrollTo({ top: top.getBoundingClientRect().top + window.scrollY - 90, behavior: "smooth" });
+    var top = $(".form-card");
+    var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (top) window.scrollTo({ top: top.getBoundingClientRect().top + window.scrollY - 84, behavior: reduced ? "auto" : "smooth" });
+    var h = $('[data-step="' + n + '"] h2');
+    if (h) { h.setAttribute("tabindex", "-1"); h.focus({ preventScroll: true }); }
   }
 
   function validateStep2() {
@@ -249,6 +274,10 @@
     return ok;
   }
 
+  function devLabel(v) {
+    var sel = document.getElementById("dispositivo"), o = sel && sel.options[sel.selectedIndex];
+    return o && o.value === v ? o.textContent : v;
+  }
   function summaryRows() {
     var d = data();
     var rolKey = { "Grabador POV": "role.pov", "Evaluador IA": "role.eval", "Ambos": "role.both" }[d.rol];
@@ -256,7 +285,7 @@
     return [
       ["f.name", d.name], ["f.email", d.email], ["f.cuit", formatCUIT(d.cuit)], ["f.dni", d.dni],
       ["f.prov", d.provincia], ["f.city", d.ciudad],
-      ["f.device", devKey ? T(devKey) : d.dispositivo], ["f.model", d.modelo],
+      ["f.device", devKey ? T(devKey) : devLabel(d.dispositivo)], ["f.model", d.modelo],
       ["f.strap", d.vincha === "Sí" ? T("yes") : T("no")], ["f.hours", d.horas],
       ["f.role", rolKey ? T(rolKey) : d.rol],
       ["f.dniF", state.images.dniF ? "✓ " + fmtSize(state.images.dniF.blob.size) : "—"],
@@ -264,13 +293,38 @@
       ["c.sign", state.sig ? "✓" : "—"]
     ];
   }
+  // Review step: rows grouped into cards, each with an "Edit" shortcut back to its step.
+  var SUMMARY_GROUPS = [
+    ["g.personal", 1, ["f.name", "f.email", "f.cuit", "f.dni"]],
+    ["g.location", 1, ["f.prov", "f.city"]],
+    ["g.work", 1, ["f.device", "f.model", "f.strap", "f.hours", "f.role"]],
+    ["g.docs", 1, ["f.dniF", "f.dniB"]],
+    ["reg.s2", 2, ["c.sign"]]
+  ];
   function renderSummary() {
-    var dl = document.getElementById("summary");
-    dl.innerHTML = "";
-    summaryRows().forEach(function (r) {
-      var dt = document.createElement("dt"); dt.textContent = T(r[0]);
-      var dd = document.createElement("dd"); dd.textContent = r[1];
-      dl.appendChild(dt); dl.appendChild(dd);
+    var box = document.getElementById("summary");
+    box.innerHTML = "";
+    var rows = {};
+    summaryRows().forEach(function (r) { rows[r[0]] = r[1]; });
+    SUMMARY_GROUPS.forEach(function (g) {
+      var card = document.createElement("section"); card.className = "sum-card";
+      var head = document.createElement("header");
+      var h = document.createElement("h3"); h.textContent = T(g[0]);
+      var edit = document.createElement("button"); edit.type = "button"; edit.textContent = T("s3.edit");
+      edit.setAttribute("aria-label", T("s3.edit") + ": " + T(g[0]));
+      edit.addEventListener("click", function () { go(g[1]); });
+      head.appendChild(h); head.appendChild(edit); card.appendChild(head);
+      var dl = document.createElement("dl");
+      g[2].forEach(function (k) {
+        var dt = document.createElement("dt"); dt.textContent = T(k);
+        var dd = document.createElement("dd");
+        if (k === "c.sign" && state.sig) {
+          var img = document.createElement("img"); img.src = state.sig; img.alt = T("c.sign"); img.className = "sig-preview";
+          dd.appendChild(img);
+        } else dd.textContent = rows[k];
+        dl.appendChild(dt); dl.appendChild(dd);
+      });
+      card.appendChild(dl); box.appendChild(card);
     });
   }
 
@@ -318,7 +372,7 @@
     }
     var ES = (window.SEVOR_I18N || {}).es || {};
 
-    doc.setDrawColor(61, 245, 196); doc.setLineWidth(1.2); doc.line(M, 12, W - M, 12);
+    doc.setDrawColor(29, 92, 147); doc.setLineWidth(1.2); doc.line(M, 12, W - M, 12);
     text("SEVOR Data — Registro de contratista", { bold: true, size: 15, lh: 7 });
     text("Generado: " + ts, { size: 8.5 });
     y += 3;
@@ -373,9 +427,9 @@
   }
 
   /* ---------- submit ---------- */
-  function setStatus(msg, isErr, busy) {
+  function setStatus(msg, isErr, busy, ok) {
     var s = document.getElementById("status");
-    s.className = "status" + (isErr ? " error" : "");
+    s.className = "status" + (isErr ? " error" : "") + (ok ? " success" : "");
     s.innerHTML = "";
     if (busy) { var sp = document.createElement("span"); sp.className = "spinner"; s.appendChild(sp); s.appendChild(document.createTextNode(" ")); }
     s.appendChild(document.createTextNode(msg || ""));
@@ -395,6 +449,9 @@
     setErr("privacy", null);
     var btn = $("#submit"), dl = $("#dlpdf");
     btn.disabled = true; dl.disabled = true;
+    btn.setAttribute("aria-busy", "true");
+    var label = btn.innerHTML;
+    btn.innerHTML = '<span class="spinner" aria-hidden="true"></span><span>' + T("s3.submit") + "</span>";
     setStatus(T("s3.sending"), false, true);
     try {
       var d = data();
@@ -431,6 +488,7 @@
           var dt = new DataTransfer(); dt.items.add(f[1]); inp.files = dt.files;
           form.appendChild(inp);
         });
+        setStatus(T("s3.sent"), false, false, true);
         form.submit();
       } else {
         // Fallback for old browsers: opaque fetch, then go to the thank-you page.
@@ -438,17 +496,19 @@
         fields.forEach(function (f) { fd.append(f[0], f[1]); });
         files.forEach(function (f) { fd.append(f[0], f[1], f[1].name); });
         await fetch(endpoint, { method: "POST", body: fd, mode: "no-cors" });
-        location.href = next;
+        setStatus(T("s3.sent"), false, false, true);
+        setTimeout(function () { location.href = next; }, 600);
       }
     } catch (e) {
       btn.disabled = false; dl.disabled = false;
+      btn.removeAttribute("aria-busy"); btn.innerHTML = label;
       setStatus(T("s3.err"), true);
     }
   }
 
   async function download() {
     var dl = $("#dlpdf");
-    dl.disabled = true;
+    dl.disabled = true; dl.setAttribute("aria-busy", "true");
     try {
       var pdf = await buildPDF();
       var a = document.createElement("a");
@@ -457,7 +517,7 @@
       setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
       setStatus("");
     } catch (e) { setStatus(T("s3.err"), true); }
-    dl.disabled = false;
+    dl.disabled = false; dl.removeAttribute("aria-busy");
   }
 
   /* ---------- init ---------- */
@@ -467,8 +527,15 @@
 
     bindFile("dniF"); bindFile("dniB");
     pad = SigPad(document.getElementById("sigpad"));
-    pad.onchange = function () { if (!pad.isEmpty()) setErr("sign", null); };
+    pad.onchange = function () {
+      var signed = !pad.isEmpty();
+      $("#sigwrap").classList.toggle("signed", signed);
+      if (signed) setErr("sign", null);
+    };
     $("#sigclear").addEventListener("click", function () { pad.clear(); state.sig = null; });
+    $("#sigundo").addEventListener("click", function () { pad.undo(); state.sig = null; });
+    $("#contract").addEventListener("scroll", docProgress, { passive: true });
+    stepCount();
     $("#accept").addEventListener("change", function () { if (this.checked) setErr("accept", null); });
     $("#privacy").addEventListener("change", function () { if (this.checked) setErr("privacy", null); });
 
@@ -500,6 +567,7 @@
 
     document.addEventListener("sevor:lang", function () {
       refreshErrors();
+      stepCount();
       if (state.step === 3) renderSummary();
       ["dniF", "dniB"].forEach(function (k) {
         var st = $('[data-status="' + k + '"]');

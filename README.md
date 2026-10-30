@@ -1,49 +1,52 @@
 # SEVOR Data: static website
 
-A static site for SEVOR Data (Bahía Blanca, Argentina): POV/egocentric video capture and Spanish-language AI content evaluation, plus contractor registration.
+A static site for SEVOR Data (Argentina): POV/egocentric video capture and Spanish-language AI content evaluation, plus contractor registration.
 It is plain HTML, CSS and JS. There is no build step and no backend. Three.js, jsPDF and Google Fonts load from CDNs.
 
 ## Structure
 
 ```
-index.html            Landing page: hero (3D globe), services, process, quality, why Argentina, work with us, contact
-registro.html         3-step contractor registration (data → contract + signature → PDF + submit)
+index.html            Landing: hero (3D point-cloud globe, Argentina highlighted), capabilities index,
+                      services (photo feature rows + metadata sample), process timeline,
+                      quality & consent spec sheet, why Argentina, recruit, final CTA, footer
+registro.html         3-step contractor registration (data + DNI → contract + signature → review + PDF + submit)
 gracias.html          Thank-you page (FormSubmit redirects here)
-404.html              GitHub Pages "not found" page
-favicon.svg           "S" logo
-CNAME                 Custom domain for GitHub Pages (sevordata.dev.ar)
+404.html              Self-contained "not found" page (no relative assets, works at any depth)
+favicon.svg           Brand mark (lens)
 .nojekyll             Tells GitHub Pages to serve the files as they are
 robots.txt, sitemap.xml
-set-base-url.sh       Changes the domain everywhere in one command
-assets/css/style.css
+set-base-url.sh       Changes the base URL everywhere in one command (does not create a CNAME)
+assets/css/style.css  Design system (tokens: type scale, 8px spacing, 12-col grid, colour, radii, motion) + all styles
 assets/js/config.js   ← ONE place for BASE_URL, email, FormSubmit endpoint, comitente data
-assets/js/i18n.js     All translations (es default, en, pt, it, fr, de)
-assets/js/main.js     Language switcher (saved in localStorage, sets <html lang>), reveal-on-scroll, tilt
-assets/js/hero3d.js   Three.js hero (ES module). Uses fewer particles on mobile, respects reduced motion, falls back without WebGL
+assets/js/i18n.js     All translations (es default, en, pt, it, fr, de). [[words]] = serif accent (data-i18n-em)
+assets/js/main.js     i18n apply, language dropdown (SVG flags, keyboard), condensing header, mobile menu, reveal-on-scroll
+assets/js/hero3d.js   Three.js hero (ES module, lazy-init after load/idle, reduced-motion = one static frame,
+                      fewer points on small screens, inline SVG map stays as fallback without WebGL)
 assets/js/contract.js Contract text (from sevor-contrato.md). Fills in the prestador's data and today's date
-assets/js/registro.js Form logic: validation (incl. CUIT check digit), image compression <1 MB, signature pad, jsPDF, FormSubmit
+assets/js/registro.js Form logic: validation (incl. CUIT check digit), image compression <1 MB, signature pad (undo/clear),
+                      jsPDF (loaded only on this page), FormSubmit
+assets/img/photos/    Responsive WebP + JPEG (640/960/1400 px) of the four photos
 assets/img/           og-image.png (1200×630), logo-512.png, apple-touch-icon.png
 ```
+
+No build step is needed to deploy: every file above is plain static HTML/CSS/JS with relative paths.
 
 ## Before going live
 
 1. **Comitente data in the contract.** Open `assets/js/config.js` and fill in `COMITENTE_TITULAR` and `COMITENTE_CUIT`. They are blank on purpose, so that no personal data sits in the public repo. Until you fill them, the contract shows blank lines.
-2. **Legal review.** The contract text is the draft from `sevor-contrato.md`. Have a lawyer review it, and fill in the payment term ("dentro de los ____ días hábiles") in `assets/js/contract.js`.
-3. **Domain.** If you use a domain other than `https://sevordata.dev.ar`, run:
+2. **Legal review.** The contract text is the draft from `sevor-contrato.md`. Have a lawyer review it, and fill in the payment term ("dentro de los ____ días hábiles") in `assets/js/contract.js`. The contract still names Bahía Blanca as the place of signature, the comitente's domicile and the jurisdiction; change those clauses only with legal advice.
+3. **Base URL.** The site is set up for `https://sevordata.github.io/Sevorweb`. To move it, run:
    ```sh
-   ./set-base-url.sh https://your-domain.com
+   ./set-base-url.sh https://your-new-base-url
    ```
-   This updates the meta tags, JSON-LD, sitemap.xml, robots.txt, config.js and CNAME.
+   This updates the meta tags, JSON-LD, sitemap.xml, robots.txt, 404.html and config.js.
 
 ## Deploy on GitHub Pages
 
-1. Create a repository, for example `sevor-data-web`, and upload **the contents** of this folder to the root of the `main` branch. Include `CNAME` and `.nojekyll`.
-2. In the repo, go to **Settings → Pages → Build and deployment**. Set Source to "Deploy from a branch", Branch to `main`, and the folder to `/ (root)`.
-3. **Custom domain.** The `CNAME` file already contains `sevordata.dev.ar`. At your DNS provider (NIC.ar delegates to your DNS host), create:
-   - For the apex `sevordata.dev.ar`: `A` records pointing to `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`. You can also add `AAAA` records: `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153`.
-   - Optional `www`: a `CNAME` record pointing to `<your-github-user>.github.io`.
-4. Once DNS has propagated, tick **Enforce HTTPS** in Settings → Pages.
-5. Optional: submit `https://sevordata.dev.ar/sitemap.xml` in Google Search Console.
+1. Upload **the contents** of this folder to the root of the `main` branch of the `Sevorweb` repository (account `sevordata`). Include `.nojekyll`. There is intentionally no `CNAME` file.
+2. In the repo, go to **Settings → Pages → Build and deployment**. Set Source to "Deploy from a branch", Branch to `main`, folder `/ (root)`.
+3. The site will be live at `https://sevordata.github.io/Sevorweb/`.
+4. Optional: submit `https://sevordata.github.io/Sevorweb/sitemap.xml` in Google Search Console. Note: on a project site, crawlers only read `robots.txt` at the domain root (`sevordata.github.io/robots.txt`), so the one in this folder is informational unless you also publish a user site.
 
 To test locally, run `python3 -m http.server 8080` in this folder and open http://localhost:8080. Opening the files directly with `file://` breaks the ES module and FormSubmit.
 
