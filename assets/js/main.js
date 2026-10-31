@@ -58,9 +58,10 @@
     var page = document.body.getAttribute("data-page");
     var titleKey = { index: "meta.index.title", registro: "meta.reg.title", gracias: "meta.thanks.title" }[page];
     if (titleKey) document.title = tp(titleKey);
-    if (page === "index") {
+    var descKey = { index: "meta.index.desc", registro: "meta.reg.desc" }[page];
+    if (descKey) {
       var md = document.querySelector('meta[name="description"]');
-      if (md) md.setAttribute("content", tp("meta.index.desc"));
+      if (md) md.setAttribute("content", tp(descKey));
     }
     var btn = document.querySelector(".lang-btn");
     if (btn) {

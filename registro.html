@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Registro de contratistas | SEVOR Data</title>
-  <meta name="description" content="Registrate como entrenador de IA independiente en Argentina: grabación de video POV y evaluación de contenido generado por IA. Trabajo flexible, nunca cobramos por sumarte.">
+  <meta name="description" content="Registrate para grabar video POV de tareas cotidianas con tu celular y una vincha, como contratista independiente en Argentina. Nunca cobramos por sumarte.">
   <meta name="theme-color" content="#f6f6f3">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://sevordata.dev.ar/registro.html">
@@ -12,8 +12,8 @@
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="SEVOR Data">
-  <meta property="og:title" content="Trabajá como entrenador de IA | SEVOR Data">
-  <meta property="og:description" content="Grabación POV y evaluación de IA desde tu casa, como contratista independiente en Argentina.">
+  <meta property="og:title" content="Grabá video POV desde tu casa | SEVOR Data">
+  <meta property="og:description" content="Grabá en primera persona tareas cotidianas y de trabajo con tu celular en una vincha, como contratista independiente en Argentina.">
   <meta property="og:url" content="https://sevordata.dev.ar/registro.html">
   <meta property="og:image" content="https://sevordata.dev.ar/assets/img/og-image.png">
   <meta property="og:image:width" content="1200">
@@ -125,41 +125,59 @@
                 </div>
 
                 <div class="group">
-                  <div class="group-head"><h3 data-i18n="g.work">Equipo y disponibilidad</h3><p data-i18n="g.work.d">Nos ayuda a asignarte el proyecto adecuado.</p></div>
+                  <div class="group-head"><h3 data-i18n="g.work">Celular y disponibilidad</h3><p data-i18n="g.work.d">Solo aceptamos celulares compatibles con nuestra app de grabación.</p></div>
                   <div class="fields">
                     <div class="field">
-                      <label for="dispositivo" data-i18n="f.device">Dispositivo para trabajar</label>
-                      <select id="dispositivo" name="dispositivo" required aria-describedby="err-dispositivo">
-                        <option value="" data-i18n="f.device.ph">Elegí una opción</option>
-                        <option value="Samsung Galaxy S21 o superior">Samsung Galaxy S21+</option>
-                        <option value="Google Pixel 6 o superior">Google Pixel 6+</option>
-                        <option value="iPhone 12 o superior">iPhone 12+</option>
-                        <option value="Otro celular" data-i18n="dev.other">Otro celular</option>
-                        <option value="Computadora" data-i18n="dev.pc">Computadora</option>
+                      <label for="dispositivo" data-i18n="f.device">Tu celular</label>
+                      <select id="dispositivo" name="dispositivo" required aria-describedby="h-dispositivo err-dispositivo">
+                        <option value="" data-i18n="f.device.ph">Elegí tu celular</option>
+                        <optgroup label="Apple iPhone">
+                          <option value="iPhone 12">iPhone 12</option>
+                          <option value="iPhone 13">iPhone 13</option>
+                          <option value="iPhone 14">iPhone 14</option>
+                          <option value="iPhone 15">iPhone 15</option>
+                          <option value="iPhone 16">iPhone 16</option>
+                          <option value="iPhone 17">iPhone 17</option>
+                          <option value="iPhone 18">iPhone 18</option>
+                        </optgroup>
+                        <optgroup label="Google Pixel">
+                          <option value="Google Pixel 6">Google Pixel 6</option>
+                          <option value="Google Pixel 7">Google Pixel 7</option>
+                          <option value="Google Pixel 8">Google Pixel 8</option>
+                          <option value="Google Pixel 9">Google Pixel 9</option>
+                          <option value="Google Pixel 10">Google Pixel 10</option>
+                        </optgroup>
+                        <optgroup label="Samsung Galaxy S">
+                          <option value="Samsung Galaxy S21">Samsung Galaxy S21</option>
+                          <option value="Samsung Galaxy S22">Samsung Galaxy S22</option>
+                          <option value="Samsung Galaxy S23">Samsung Galaxy S23</option>
+                          <option value="Samsung Galaxy S24">Samsung Galaxy S24</option>
+                          <option value="Samsung Galaxy S25">Samsung Galaxy S25</option>
+                          <option value="Samsung Galaxy S26">Samsung Galaxy S26</option>
+                        </optgroup>
+                        <option value="Otro" data-i18n="dev.other">Otro celular (no compatible)</option>
                       </select>
+                      <span class="hint" id="h-dispositivo" data-i18n="f.device.h">iPhone 12–18 (no 16e, 17e ni 18e), Google Pixel 6–10 o Samsung Galaxy S21–S26.</span>
                       <span class="err" id="err-dispositivo" data-err="dispositivo"></span>
                     </div>
                     <div class="field">
                       <label for="modelo" data-i18n="f.model">Modelo exacto</label>
-                      <input id="modelo" name="modelo" type="text" required maxlength="80" data-i18n-attr="placeholder:f.model.ph" aria-describedby="err-modelo">
+                      <input id="modelo" name="modelo" type="text" required maxlength="80" data-i18n-attr="placeholder:f.model.ph" placeholder="Ej.: iPhone 13 Pro, Pixel 8, Galaxy S23 Ultra" aria-describedby="h-modelo err-modelo">
+                      <span class="hint" id="h-modelo" data-i18n="f.model.h">Como figura en Ajustes del celular.</span>
                       <span class="err" id="err-modelo" data-err="modelo"></span>
                     </div>
+                    <div class="field full" id="ios-field" hidden>
+                      <label class="check" style="margin-top:0"><input type="checkbox" id="ios" name="ios"><span data-i18n="f.ios">Mi iPhone tiene iOS 17.4 o posterior</span></label>
+                      <span class="err" data-err="ios"></span>
+                    </div>
                     <fieldset class="field full">
-                      <legend data-i18n="f.strap">¿Tenés vincha o soporte de cabeza para el celular?</legend>
+                      <legend data-i18n="f.strap">¿Tenés una vincha de cabeza para el celular?</legend>
                       <div class="choices" style="margin-top:.375rem">
                         <label class="choice"><input type="radio" name="vincha" value="Sí" required><span data-i18n="yes">Sí</span></label>
                         <label class="choice"><input type="radio" name="vincha" value="No"><span data-i18n="no">No</span></label>
                       </div>
                       <span class="err" data-err="vincha"></span>
-                    </fieldset>
-                    <fieldset class="field full">
-                      <legend data-i18n="f.role">Rol</legend>
-                      <div class="choices" style="margin-top:.375rem">
-                        <label class="choice"><input type="radio" name="rol" value="Grabador POV" required><span data-i18n="role.pov">Grabador POV</span></label>
-                        <label class="choice"><input type="radio" name="rol" value="Evaluador IA"><span data-i18n="role.eval">Evaluador IA</span></label>
-                        <label class="choice"><input type="radio" name="rol" value="Ambos"><span data-i18n="role.both">Ambos</span></label>
-                      </div>
-                      <span class="err" data-err="rol"></span>
+                      <p class="callout is-warn" id="strap-note" style="margin-top:var(--sp-2)" hidden><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.2 17.6 16H2.4z"/><path d="M10 8v3.6M10 13.8h.01"/></svg><span data-i18n="strap.no">Vas a necesitar una vincha antes de grabar: sostiene el celular a la altura de la frente, inclinado hacia tus manos. Corre por tu cuenta.</span></p>
                     </fieldset>
                     <div class="field">
                       <label for="horas" data-i18n="f.hours">Horas por semana disponibles</label>
@@ -270,6 +288,17 @@
               <li data-i18n="aside.3">Unos 10 minutos</li>
             </ul>
           </div>
+          <div class="aside-card">
+            <h2 data-i18n="aside.req.title">Requisitos para grabar</h2>
+            <ul class="ticks">
+              <li data-i18n="aside.req.1">iPhone 12–18 (no 16e, 17e ni 18e), iOS 17.4+</li>
+              <li data-i18n="aside.req.2">Google Pixel 6–10</li>
+              <li data-i18n="aside.req.3">Samsung Galaxy S21–S26</li>
+              <li data-i18n="aside.req.4">Vincha de cabeza (a tu cargo)</li>
+              <li data-i18n="aside.req.5">Clips de 1 a 30 min, en horizontal</li>
+            </ul>
+            <p class="small" style="margin-top:var(--sp-2)"><a class="link" href="./#requisitos" data-i18n="work.cta2">Ver requisitos</a></p>
+          </div>
           <p class="callout is-warn"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.2 17.6 16H2.4z"/><path d="M10 8v3.6M10 13.8h.01"/></svg><span data-i18n="work.b3">Nunca cobramos por sumarte ni por acceder a proyectos.</span></p>
           <p class="callout"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="12" height="8.5" rx="2"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9"/></svg><span data-i18n="aside.privacy">Usamos tus datos solo para gestionar el contrato, verificar tu identidad y facturar (Ley 25.326).</span></p>
         </aside>
@@ -298,6 +327,7 @@
           <h2 id="f-work" data-i18n="footer.work">Trabajar</h2>
           <ul>
             <li><a href="./#trabaja" data-i18n="nav.work">Trabajá con nosotros</a></li>
+            <li><a href="./#requisitos" data-i18n="nav.req">Requisitos</a></li>
             <li><a href="registro.html" data-i18n="footer.register">Registro de contratistas</a></li>
           </ul>
         </nav>

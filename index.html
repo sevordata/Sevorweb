@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>SEVOR Data | Proveedor de datos POV y evaluadores de IA en Argentina</title>
-  <meta name="description" content="Video egocéntrico (POV) de tareas del hogar y evaluación en español de contenido generado por IA, con contratistas argentinos. Muestra gratuita y pilotos para empresas de IA y robótica.">
-  <meta name="keywords" content="egocentric video data Argentina, POV video data collection Latin America, AI trainers Argentina, proveedor de datos POV Argentina, video egocéntrico, first-person video dataset, evaluación de video generado por IA, Spanish AI evaluators, robotics training data">
+  <title>SEVOR Data | Datos de video POV egocéntrico desde Argentina</title>
+  <meta name="description" content="Video egocéntrico (POV) de tareas cotidianas y de trabajo, grabado por contratistas argentinos con el celular en una vincha. Muestra gratuita y pilotos para empresas de IA y robótica.">
+  <meta name="keywords" content="egocentric video data Argentina, POV video data collection Latin America, first-person video dataset, head-mounted phone video, proveedor de datos POV Argentina, video egocéntrico, video en primera persona, robotics training data, manipulation dataset, household tasks video">
   <meta name="theme-color" content="#f6f6f3">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://sevordata.dev.ar/">
@@ -14,13 +14,13 @@
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="SEVOR Data">
-  <meta property="og:title" content="SEVOR Data | Egocentric POV video data & AI evaluators from Argentina">
-  <meta property="og:description" content="First-person (POV) video of everyday household and manual tasks, and Spanish-language evaluation of AI-generated video and images. Free sample and pilots for AI and robotics teams.">
+  <meta property="og:title" content="SEVOR Data | Egocentric POV video data from Argentina">
+  <meta property="og:description" content="First-person (POV) video of everyday and work tasks, recorded by Argentine contractors with a phone on a head mount. Free sample and pilots for AI and robotics teams.">
   <meta property="og:url" content="https://sevordata.dev.ar/">
   <meta property="og:image" content="https://sevordata.dev.ar/assets/img/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="SEVOR Data — POV video data and AI evaluators from Argentina">
+  <meta property="og:image:alt" content="SEVOR Data — egocentric POV video data from Argentina">
   <meta property="og:locale" content="es_AR">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:locale:alternate" content="pt_BR">
@@ -28,8 +28,8 @@
   <meta property="og:locale:alternate" content="fr_FR">
   <meta property="og:locale:alternate" content="de_DE">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SEVOR Data | POV video data & AI evaluators from Argentina">
-  <meta name="twitter:description" content="Egocentric video capture and Spanish-language AI content evaluation by Argentine contractors. Free sample, paid pilot, weekly delivery.">
+  <meta name="twitter:title" content="SEVOR Data | Egocentric POV video data from Argentina">
+  <meta name="twitter:description" content="First-person video of everyday and work tasks, recorded with a head-mounted phone by Argentine contractors. Free sample, paid pilot, weekly delivery.">
   <meta name="twitter:image" content="https://sevordata.dev.ar/assets/img/og-image.png">
 
   <script>document.documentElement.classList.add("js");</script>
@@ -54,7 +54,7 @@
         "url": "https://sevordata.dev.ar/",
         "logo": "https://sevordata.dev.ar/assets/img/logo-512.png",
         "email": "contacto.sevor@gmail.com",
-        "description": "Early-stage provider of Argentine remote contractors for first-person (egocentric) video capture and Spanish-language evaluation of AI-generated content.",
+        "description": "Early-stage provider of first-person (egocentric) POV video data recorded by Argentine contractors with a head-mounted phone.",
         "address": { "@type": "PostalAddress", "addressCountry": "AR" },
         "areaServed": "Worldwide",
         "knowsLanguage": ["es", "en", "pt"],
@@ -75,17 +75,7 @@
         "serviceType": "First-person video data collection for AI and robotics",
         "provider": { "@id": "https://sevordata.dev.ar/#org" },
         "areaServed": "Worldwide",
-        "description": "Argentine contractors record first-person video of everyday household and manual tasks with smartphone and head mount, following the client's specification, with signed consent and QA before delivery."
-      },
-      {
-        "@type": "Service",
-        "@id": "https://sevordata.dev.ar/#eval",
-        "name": "Spanish-language AI content evaluation",
-        "serviceType": "Human evaluation and labeling of AI-generated video and images",
-        "provider": { "@id": "https://sevordata.dev.ar/#org" },
-        "areaServed": "Worldwide",
-        "availableLanguage": "Spanish",
-        "description": "Native Spanish-speaking evaluators rate, compare and label AI-generated video and images: prompt fidelity, physical coherence, artifacts, safety and cultural naturalness."
+        "description": "Argentine contractors record first-person video of everyday household and work tasks with a supported smartphone on a head mount at forehead level (landscape clips of 1 to 30 minutes, hands visible), following the client's specification, with signed consent and QA before delivery."
       }
     ]
   }
@@ -129,6 +119,7 @@
           <li><a href="#calidad" data-i18n="nav.quality">Calidad</a></li>
           <li><a href="#argentina" data-i18n="nav.why">Por qué Argentina</a></li>
           <li><a href="#trabaja" data-i18n="nav.work">Trabajá con nosotros</a></li>
+          <li><a href="#requisitos" data-i18n="nav.req">Requisitos</a></li>
         </ul></nav>
         <div class="cta-row">
           <a class="btn btn-primary" href="mailto:contacto.sevor@gmail.com?subject=SEVOR%20Data%20pilot" data-i18n="nav.cta">Pedir una muestra</a>
@@ -146,15 +137,15 @@
           <div class="hero-copy">
             <p class="reveal"><span class="pill"><span class="dot" aria-hidden="true"></span><span data-i18n="hero.badge">Pilotos abiertos</span></span></p>
             <p class="eyebrow reveal d1" data-i18n="hero.eyebrow">Datos para IA y robótica · Argentina</p>
-            <h1 id="hero-title" class="reveal d1" data-i18n-em="hero.title">Datos POV y evaluadores de IA, <em>desde Argentina.</em></h1>
-            <p class="lead reveal d2" data-i18n="hero.lead">Coordinamos contratistas argentinos que graban video en primera persona de tareas cotidianas y manuales, y que evalúan en español contenido generado por IA. Especificación a medida, muestra gratuita y entrega semanal.</p>
+            <h1 id="hero-title" class="reveal d1" data-i18n-em="hero.title">Video POV egocéntrico, <em>desde Argentina.</em></h1>
+            <p class="lead reveal d2" data-i18n="hero.lead">Coordinamos contratistas argentinos que graban en primera persona tareas cotidianas y de trabajo, con el celular en una vincha a la altura de la frente. Especificación a medida, muestra gratuita y entrega semanal.</p>
             <div class="cta-row reveal d3">
               <a class="btn btn-primary btn-lg" href="mailto:contacto.sevor@gmail.com?subject=SEVOR%20Data%20pilot"><span data-i18n="hero.cta1">Pedir una muestra</span><svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
               <a class="btn btn-secondary btn-lg" href="registro.html" data-i18n="hero.cta2">Quiero trabajar</a>
             </div>
             <ul class="hero-meta reveal d4">
               <li data-i18n="hero.tag1">Video egocéntrico</li>
-              <li data-i18n="hero.tag2">Evaluación en español</li>
+              <li data-i18n="hero.tag2">Celular + vincha</li>
               <li data-i18n="hero.tag3">UTC−3</li>
             </ul>
           </div>
@@ -189,11 +180,11 @@
             <h2 id="cap-title" class="eyebrow" data-i18n="cap.label">Capacidades</h2>
           </div>
         </div>
-        <p class="cap-statement reveal" style="max-width:28em" data-i18n="srv.lead">Datos del mundo real para entrenar y evaluar modelos de visión, video generativo y robótica.</p>
+        <p class="cap-statement reveal" style="max-width:28em" data-i18n="srv.lead">Video egocéntrico del mundo real para entrenar modelos de visión, manipulación y robótica.</p>
         <ol class="cap-list" role="list">
           <li class="reveal d1"><a href="#svc-pov"><span class="num">01</span><h3><span data-i18n="srv.1.t">Captura de video POV</span><span class="go" aria-hidden="true">↗</span></h3><p data-i18n="cap.1.d">Tareas cotidianas y manuales grabadas en primera persona.</p></a></li>
-          <li class="reveal d2"><a href="#svc-eval"><span class="num">02</span><h3><span data-i18n="srv.2.t">Evaluación de contenido de IA</span><span class="go" aria-hidden="true">↗</span></h3><p data-i18n="cap.2.d">Puntajes, comparaciones y etiquetas de video e imágenes generados.</p></a></li>
-          <li class="reveal d3"><a href="#svc-meta"><span class="num">03</span><h3><span data-i18n="srv.3.t">Metadatos y anotación</span><span class="go" aria-hidden="true">↗</span></h3><p data-i18n="cap.3.d">Pasos con marcas de tiempo, objetos y entorno, en tu formato.</p></a></li>
+          <li class="reveal d2"><a href="#svc-work"><span class="num">02</span><h3><span data-i18n="srv.2.t">POV de tareas de trabajo</span><span class="go" aria-hidden="true">↗</span></h3><p data-i18n="cap.2.d">Oficios y tareas manuales, con las manos siempre en cuadro.</p></a></li>
+          <li class="reveal d3"><a href="#svc-meta"><span class="num">03</span><h3><span data-i18n="srv.3.t">Metadatos por clip</span><span class="go" aria-hidden="true">↗</span></h3><p data-i18n="cap.3.d">Pasos con marcas de tiempo, objetos y entorno, en tu formato.</p></a></li>
           <li class="reveal d4"><a href="#calidad"><span class="num">04</span><h3><span data-i18n="qa.kicker">Calidad y consentimiento</span><span class="go" aria-hidden="true">↗</span></h3><p data-i18n="cap.4.d">Contrato firmado, Ley 25.326 y QA antes de cada entrega.</p></a></li>
         </ol>
       </div>
@@ -219,32 +210,32 @@
           <div class="feature-body reveal d1">
             <span class="num">01</span>
             <h3 data-i18n="srv.1.t">Captura de video POV</h3>
-            <p data-i18n="srv.1.d">Grabaciones en primera persona con celular y soporte de cabeza: cocinar, limpiar, ordenar, reparar, armar y otras tareas manuales, según tu especificación de encuadre, duración, resolución y escenarios.</p>
+            <p data-i18n="srv.1.d">Grabaciones en primera persona con el celular en una vincha: cocinar, limpiar, ordenar, lavar la ropa, guardar cosas y otras tareas del hogar, según tu especificación de encuadre, duración y escenarios.</p>
             <ul class="ticks is-ruled">
-              <li data-i18n="srv.1.b1">Smartphone + vincha o soporte de cabeza</li>
+              <li data-i18n="srv.1.b1">Celular compatible en vincha, a la altura de la frente</li>
               <li data-i18n="srv.1.b2">Hogares reales y ambientes variados</li>
               <li data-i18n="srv.1.b3">Guías de captura a medida</li>
             </ul>
           </div>
         </article>
 
-        <article class="grid-12 feature is-reversed" id="svc-eval">
+        <article class="grid-12 feature is-reversed" id="svc-work">
           <div class="feature-media reveal">
             <div class="media">
               <picture>
-                <source type="image/webp" srcset="assets/img/photos/evaluation-desk-640.webp 640w, assets/img/photos/evaluation-desk-960.webp 960w, assets/img/photos/evaluation-desk-1400.webp 1400w" sizes="(min-width: 1024px) 690px, 94vw">
-                <img src="assets/img/photos/evaluation-desk-960.jpg" srcset="assets/img/photos/evaluation-desk-640.jpg 640w, assets/img/photos/evaluation-desk-960.jpg 960w, assets/img/photos/evaluation-desk-1400.jpg 1400w" sizes="(min-width: 1024px) 690px, 94vw" width="1400" height="764" loading="lazy" decoding="async" alt="Persona revisando cuadros de video en una laptop, de noche, en un escritorio" data-i18n-attr="alt:img.eval">
+                <source type="image/webp" srcset="assets/img/photos/pov-kitchen-640.webp 640w, assets/img/photos/pov-kitchen-960.webp 960w, assets/img/photos/pov-kitchen-1400.webp 1400w" sizes="(min-width: 1024px) 690px, 94vw">
+                <img src="assets/img/photos/pov-kitchen-960.jpg" srcset="assets/img/photos/pov-kitchen-640.jpg 640w, assets/img/photos/pov-kitchen-960.jpg 960w, assets/img/photos/pov-kitchen-1400.jpg 1400w" sizes="(min-width: 1024px) 690px, 94vw" width="1400" height="764" loading="lazy" decoding="async" alt="Vista en primera persona de unas manos amasando pan sobre una mesa de madera enharinada" data-i18n-attr="alt:img.kitchen">
               </picture>
             </div>
           </div>
           <div class="feature-body reveal d1">
             <span class="num">02</span>
-            <h3 data-i18n="srv.2.t">Evaluación de contenido de IA</h3>
-            <p data-i18n="srv.2.d">Evaluadores nativos en español que puntúan, comparan y etiquetan video e imágenes generados por IA: fidelidad al prompt, coherencia física, artefactos, seguridad y naturalidad cultural.</p>
+            <h3 data-i18n="srv.2.t">POV de tareas de trabajo</h3>
+            <p data-i18n="srv.2.d">Oficios y tareas manuales grabados desde los ojos de quien trabaja: cocina, reparación, armado, mantenimiento y uso de herramientas, con las manos siempre en cuadro.</p>
             <ul class="ticks is-ruled">
-              <li data-i18n="srv.2.b1">Rúbricas propias o del cliente</li>
-              <li data-i18n="srv.2.b2">Comparaciones A/B y puntajes</li>
-              <li data-i18n="srv.2.b3">Español rioplatense y neutro</li>
+              <li data-i18n="srv.2.b1">Clips de 1 a 30 minutos, en horizontal</li>
+              <li data-i18n="srv.2.b2">Manos visibles y buena iluminación</li>
+              <li data-i18n="srv.2.b3">Talleres, comercios y espacios de trabajo reales</li>
             </ul>
           </div>
         </article>
@@ -258,7 +249,7 @@
   <span class="k">"clip_id"</span><span class="p">:</span> <span class="s">"pov_000123"</span><span class="p">,</span>
   <span class="k">"task"</span><span class="p">:</span> <span class="s">"fold_laundry"</span><span class="p">,</span>
   <span class="k">"environment"</span><span class="p">: {</span> <span class="k">"room"</span><span class="p">:</span> <span class="s">"bedroom"</span><span class="p">,</span> <span class="k">"country"</span><span class="p">:</span> <span class="s">"AR"</span> <span class="p">},</span>
-  <span class="k">"device"</span><span class="p">: {</span> <span class="k">"type"</span><span class="p">:</span> <span class="s">"smartphone"</span><span class="p">,</span> <span class="k">"mount"</span><span class="p">:</span> <span class="s">"head_strap"</span> <span class="p">},</span>
+  <span class="k">"device"</span><span class="p">: {</span> <span class="k">"type"</span><span class="p">:</span> <span class="s">"smartphone"</span><span class="p">,</span> <span class="k">"mount"</span><span class="p">:</span> <span class="s">"head_strap"</span><span class="p">,</span> <span class="k">"orientation"</span><span class="p">:</span> <span class="s">"landscape"</span> <span class="p">},</span>
   <span class="k">"steps"</span><span class="p">: [</span>
     <span class="p">{</span> <span class="k">"t"</span><span class="p">:</span> <span class="n">4.2</span><span class="p">,</span>  <span class="k">"action"</span><span class="p">:</span> <span class="s">"pick_up_shirt"</span> <span class="p">},</span>
     <span class="p">{</span> <span class="k">"t"</span><span class="p">:</span> <span class="n">11.8</span><span class="p">,</span> <span class="k">"action"</span><span class="p">:</span> <span class="s">"fold_sleeves"</span> <span class="p">},</span>
@@ -273,7 +264,7 @@
           </div>
           <div class="feature-body reveal d1">
             <span class="num">03</span>
-            <h3 data-i18n="srv.3.t">Metadatos y anotación</h3>
+            <h3 data-i18n="srv.3.t">Metadatos por clip</h3>
             <p data-i18n="srv.3.d">Cada clip puede incluir descripción de la tarea, pasos con marcas de tiempo, objetos, ambiente y dispositivo, en el formato que necesite tu pipeline.</p>
             <ul class="ticks is-ruled">
               <li data-i18n="srv.3.b1">Segmentación por pasos</li>
@@ -297,7 +288,7 @@
         </header>
         <ol class="timeline" role="list">
           <li class="reveal d1"><span class="node" aria-hidden="true">01</span><span class="step-label"><span data-i18n="proc.step">Paso</span> 01</span><h3 data-i18n="proc.1.t">Especificación</h3><p data-i18n="proc.1.d">Nos contás tareas, ambientes, formato, volumen y requisitos técnicos. Acordamos guías y criterios de aceptación.</p></li>
-          <li class="reveal d2"><span class="node" aria-hidden="true">02</span><span class="step-label"><span data-i18n="proc.step">Paso</span> 02</span><h3 data-i18n="proc.2.t">Muestra gratuita</h3><p data-i18n="proc.2.d">Grabamos o evaluamos un lote corto sin costo para que valides calidad y formato.</p></li>
+          <li class="reveal d2"><span class="node" aria-hidden="true">02</span><span class="step-label"><span data-i18n="proc.step">Paso</span> 02</span><h3 data-i18n="proc.2.t">Muestra gratuita</h3><p data-i18n="proc.2.d">Grabamos un lote corto sin costo para que valides calidad y formato.</p></li>
           <li class="reveal d3"><span class="node" aria-hidden="true">03</span><span class="step-label"><span data-i18n="proc.step">Paso</span> 03</span><h3 data-i18n="proc.3.t">Piloto pago</h3><p data-i18n="proc.3.d">Un piloto acotado, con precio, plazo y volumen definidos por escrito.</p></li>
           <li class="reveal d4"><span class="node" aria-hidden="true">04</span><span class="step-label"><span data-i18n="proc.step">Paso</span> 04</span><h3 data-i18n="proc.4.t">Entrega semanal</h3><p data-i18n="proc.4.d">Lotes semanales revisados, con reporte de horas aceptadas y ajustes según tu feedback.</p></li>
         </ol>
@@ -344,7 +335,7 @@
             <figcaption><span data-i18n="why.map">Equipo remoto</span><span>Argentina · UTC−3</span></figcaption>
           </figure>
           <ul class="facts" role="list">
-            <li class="reveal d1"><span class="token">es<em>-AR</em></span><h3 data-i18n="why.1.t">Español nativo</h3><p data-i18n="why.1.d">Hablantes nativos que captan matices regionales y evalúan contenido en español con criterio cultural.</p></li>
+            <li class="reveal d1"><span class="token">AR</span><h3 data-i18n="why.1.t">Contratistas en todo el país</h3><p data-i18n="why.1.d">Personas de distintas provincias, hogares y oficios, que suman variedad real a cada lote.</p></li>
             <li class="reveal d2"><span class="token">LATAM</span><h3 data-i18n="why.2.t">Escenarios latinoamericanos</h3><p data-i18n="why.2.d">Cocinas, casas, herramientas y objetos reales de la región: diversidad que escasea en los datasets.</p></li>
             <li class="reveal d3"><span class="token">UTC<em>−3</em></span><h3 data-i18n="why.3.t">UTC−3, en sintonía con EE. UU.</h3><p data-i18n="why.3.d">Jornada superpuesta con la costa este y gran parte de la oeste de EE. UU., y tardes compartidas con Europa.</p></li>
             <li class="reveal d4"><span class="token">B2B</span><h3 data-i18n="why.4.t">Costo eficiente</h3><p data-i18n="why.4.d">Talento calificado a costos competitivos y con facturación formal.</p></li>
@@ -367,8 +358,8 @@
           </div>
           <div class="recruit-body reveal d1">
             <p class="eyebrow" data-i18n="work.kicker">Trabajá con nosotros</p>
-            <h2 id="work-title" data-i18n-em="work.title">Sé entrenador de IA <em>desde tu casa</em></h2>
-            <p class="lead" data-i18n="work.lead">Buscamos personas en Argentina para grabar tareas cotidianas en primera persona o evaluar contenido generado por IA. Es trabajo independiente y flexible, no una relación de empleo.</p>
+            <h2 id="work-title" data-i18n-em="work.title">Grabá tareas en primera persona <em>desde tu casa</em></h2>
+            <p class="lead" data-i18n="work.lead">Buscamos personas en Argentina para grabar en video, en primera persona, tareas cotidianas y de trabajo con el celular en una vincha. Es trabajo independiente y flexible, no una relación de empleo.</p>
             <ul class="ticks is-ruled">
               <li data-i18n="work.b1">Contratista independiente: elegís tus días y horarios.</li>
               <li data-i18n="work.b2">Cualquiera de las partes puede terminar con 5 días de aviso.</li>
@@ -377,14 +368,39 @@
               <li data-i18n="work.b5">Se paga solo el material que supera el control de calidad.</li>
             </ul>
             <p class="callout is-warn"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.2 17.6 16H2.4z"/><path d="M10 8v3.6M10 13.8h.01"/></svg><span data-i18n="work.warn">Si alguien te pide dinero en nombre de SEVOR Data, es una estafa.</span></p>
-            <div class="cta-row"><a class="btn btn-primary btn-lg" href="registro.html"><span data-i18n="work.cta">Registrarme</span><svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+            <div class="cta-row"><a class="btn btn-primary btn-lg" href="registro.html"><span data-i18n="work.cta">Registrarme</span><svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="btn btn-secondary btn-lg" href="#requisitos" data-i18n="work.cta2">Ver requisitos</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============ REQUIREMENTS ============ -->
+    <section class="section section--white" id="requisitos" aria-labelledby="req-title">
+      <div class="container">
+        <div class="grid-12 qa-grid">
+          <div class="qa-intro reveal">
+            <p class="eyebrow" data-i18n="req.kicker">Requisitos</p>
+            <h2 id="req-title" data-i18n-em="req.title">Lo que necesitás para <em>grabar</em></h2>
+            <p class="lead" data-i18n="req.lead">Grabás con nuestra app de grabación, que funciona solo en estos celulares. Otros celulares no se aceptan.</p>
+            <div class="cta-row" style="margin-top:var(--sp-4)"><a class="btn btn-primary" href="registro.html"><span data-i18n="work.cta">Registrarme</span><svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+          </div>
+          <div class="qa-sheet reveal d1">
+            <div class="sheet-head"><span class="mono" data-i18n="req.doc">Requisitos para grabar</span><span class="mono doc-id">SVR-REQ · v1</span></div>
+            <div class="sheet-cols" aria-hidden="true"><span>ID</span><span data-i18n="qa.col.2">Detalle</span><span data-i18n="req.must">Obligatorio</span></div>
+            <div class="sheet-row"><span class="id">REQ-01</span><div><h3 data-i18n="req.1.t">iPhone 12 a iPhone 18</h3><p data-i18n="req.1.d">Incluye mini, Plus, Pro y Pro Max. No incluye iPhone 16e, 17e ni 18e. Requiere iOS 17.4 o posterior.</p></div><span class="status-chip"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3.5 8.4 2.9 2.9 6-6.3"/></svg><span data-i18n="req.must">Obligatorio</span></span></div>
+            <div class="sheet-row"><span class="id">REQ-02</span><div><h3 data-i18n="req.2.t">Google Pixel 6 a Pixel 10</h3><p data-i18n="req.2.d">Incluye los modelos Pro.</p></div><span class="status-chip"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3.5 8.4 2.9 2.9 6-6.3"/></svg><span data-i18n="req.must">Obligatorio</span></span></div>
+            <div class="sheet-row"><span class="id">REQ-03</span><div><h3 data-i18n="req.3.t">Samsung Galaxy S21 a S26</h3><p data-i18n="req.3.d">Incluye los modelos Plus y Ultra.</p></div><span class="status-chip"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3.5 8.4 2.9 2.9 6-6.3"/></svg><span data-i18n="req.must">Obligatorio</span></span></div>
+            <div class="sheet-row"><span class="id">REQ-04</span><div><h3 data-i18n="req.4.t">Vincha de cabeza</h3><p data-i18n="req.4.d">Sostiene el celular a la altura de la frente, inclinado hacia tus manos. Es obligatoria y corre por cuenta del contratista.</p></div><span class="status-chip"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3.5 8.4 2.9 2.9 6-6.3"/></svg><span data-i18n="req.must">Obligatorio</span></span></div>
+            <div class="sheet-row"><span class="id">REQ-05</span><div><h3 data-i18n="req.5.t">Clips de 1 a 30 minutos</h3><p data-i18n="req.5.d">Siempre en horizontal.</p></div><span class="status-chip"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3.5 8.4 2.9 2.9 6-6.3"/></svg><span data-i18n="req.must">Obligatorio</span></span></div>
+            <div class="sheet-row"><span class="id">REQ-06</span><div><h3 data-i18n="req.6.t">Manos visibles y buena luz</h3><p data-i18n="req.6.d">Tus manos tienen que verse durante toda la tarea, en un lugar bien iluminado.</p></div><span class="status-chip"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3.5 8.4 2.9 2.9 6-6.3"/></svg><span data-i18n="req.must">Obligatorio</span></span></div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ============ FINAL CTA ============ -->
-    <section class="section is-flush" id="contacto" aria-labelledby="contact-title" style="padding-bottom:var(--section-y)">
+    <section class="section" id="contacto" aria-labelledby="contact-title" style="padding-bottom:var(--section-y)">
       <div class="container">
         <div class="cta-band reveal">
           <div class="grid-12">
@@ -428,6 +444,7 @@
           <h2 id="f-work" data-i18n="footer.work">Trabajar</h2>
           <ul>
             <li><a href="#trabaja" data-i18n="nav.work">Trabajá con nosotros</a></li>
+            <li><a href="#requisitos" data-i18n="nav.req">Requisitos</a></li>
             <li><a href="registro.html" data-i18n="footer.register">Registro de contratistas</a></li>
           </ul>
         </nav>

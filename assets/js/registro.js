@@ -28,6 +28,51 @@
   }
   function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(v || "").trim()); }
 
+  /* ---------- supported phones (rules of our recording app) ----------
+     iPhone 12–18 (mini, Plus, Pro, Pro Max; NOT 16e/17e/18e; iOS 17.4+),
+     Google Pixel 6–10 (incl. Pro), Samsung Galaxy S21–S26 (incl. Plus, Ultra).
+     Any other phone is rejected. */
+  var PHONES = { iphone: [12, 18], pixel: [6, 10], galaxy: [21, 26] };
+  function phoneFamily(v) {
+    var m = /^iPhone (\d+)$/.exec(v);
+    if (m) return { brand: "iphone", n: +m[1] };
+    m = /^Google Pixel (\d+)$/.exec(v);
+    if (m) return { brand: "pixel", n: +m[1] };
+    m = /^Samsung Galaxy S(\d+)$/.exec(v);
+    if (m) return { brand: "galaxy", n: +m[1] };
+    return null;
+  }
+  function supportedFamily(v) {
+    var f = phoneFamily(v);
+    return !!(f && f.n >= PHONES[f.brand][0] && f.n <= PHONES[f.brand][1]);
+  }
+  // The exact model typed must belong to the chosen family and not be an excluded variant.
+  function supportedModel(family, model) {
+    var f = phoneFamily(family);
+    if (!f) return false;
+    var m = " " + String(model || "").toLowerCase().replace(/\+/g, " plus ").replace(/[^a-z0-9]+/g, " ").trim() + " ";
+    var num = String(f.n);
+    if (f.brand === "iphone") {
+      if (/pixel|galaxy|samsung|google/.test(m)) return false;
+      if (!new RegExp("(^|[^0-9])" + num + "([^0-9]|$)").test(m)) return false;
+      if (new RegExp("(^|[^0-9])" + num + " ?e ").test(m)) return false;          // 16e, 17e, 18e
+      if (/ (se|air|xr|xs) /.test(m)) return false;
+      return true;
+    }
+    if (f.brand === "pixel") {
+      if (/iphone|apple|galaxy|samsung/.test(m)) return false;
+      if (!new RegExp("(^|[^0-9])" + num + "([^0-9]|$)").test(m)) return false;
+      if (new RegExp("(^|[^0-9])" + num + " ?a ").test(m)) return false;          // 6a, 7a, 8a…
+      if (/ fold /.test(m)) return false;
+      return true;
+    }
+    if (/iphone|apple|pixel|google/.test(m)) return false;
+    if (!new RegExp("(^|[^0-9])" + num + "([^0-9]|$)").test(m)) return false;
+    if (/ (fe|edge) /.test(m) || new RegExp(" s?" + num + " ?fe ").test(m)) return false; // FE / Edge not listed
+    return true;
+  }
+  function isIphone(v) { var f = phoneFamily(v); return !!(f && f.brand === "iphone"); }
+
   function setErr(key, msgKey) {
     state.errors[key] = msgKey || null;
     var el = $('[data-err="' + key + '"]');
@@ -51,7 +96,8 @@
     return {
       name: val("name"), email: val("email"), cuit: digits(val("cuit")), dni: digits(val("dni")),
       provincia: val("provincia"), ciudad: val("ciudad"), dispositivo: val("dispositivo"), modelo: val("modelo"),
-      vincha: radio("vincha"), horas: val("horas"), rol: radio("rol"),
+      vincha: radio("vincha"), horas: val("horas"), rol: "Grabador POV",
+      ios: isIphone(val("dispositivo")) ? (document.getElementById("ios").checked ? "Sí" : "No") : "",
       get domicilio() { return [this.ciudad, this.provincia, "Argentina"].filter(Boolean).join(", "); }
     };
   }
@@ -69,11 +115,13 @@
     req("dni", d.dni, function (v) { return v.length >= 7 && v.length <= 8 ? null : "err.dni"; });
     req("provincia", d.provincia);
     req("ciudad", d.ciudad);
-    req("dispositivo", d.dispositivo);
-    req("modelo", d.modelo);
+    req("dispositivo", d.dispositivo, function (v) { return supportedFamily(v) ? null : "err.device"; });
+    req("modelo", d.modelo, function (v) { return !supportedFamily(d.dispositivo) || supportedModel(d.dispositivo, v) ? null : "err.model"; });
+    if (isIphone(d.dispositivo)) {
+      if (d.ios !== "Sí") { setErr("ios", "err.ios"); ok = false; } else setErr("ios", null);
+    } else setErr("ios", null);
     req("vincha", d.vincha);
     req("horas", d.horas, function (v) { var n = Number(v); return n >= 1 && n <= 80 && Math.floor(n) === n ? null : "err.hours"; });
-    req("rol", d.rol);
     ["dniF", "dniB"].forEach(function (k) {
       if (!state.images[k]) { setErr(k, state.errors[k] === "err.img" ? "err.img" : "err.required"); ok = false; }
       else setErr(k, null);
@@ -280,24 +328,24 @@
   }
   function summaryRows() {
     var d = data();
-    var rolKey = { "Grabador POV": "role.pov", "Evaluador IA": "role.eval", "Ambos": "role.both" }[d.rol];
-    var devKey = { "Otro celular": "dev.other", "Computadora": "dev.pc" }[d.dispositivo];
-    return [
+    var rows = [
       ["f.name", d.name], ["f.email", d.email], ["f.cuit", formatCUIT(d.cuit)], ["f.dni", d.dni],
       ["f.prov", d.provincia], ["f.city", d.ciudad],
-      ["f.device", devKey ? T(devKey) : devLabel(d.dispositivo)], ["f.model", d.modelo],
+      ["f.device", devLabel(d.dispositivo)], ["f.model", d.modelo]
+    ];
+    if (d.ios) rows.push(["f.ios", d.ios === "Sí" ? T("yes") : T("no")]);
+    return rows.concat([
       ["f.strap", d.vincha === "Sí" ? T("yes") : T("no")], ["f.hours", d.horas],
-      ["f.role", rolKey ? T(rolKey) : d.rol],
       ["f.dniF", state.images.dniF ? "✓ " + fmtSize(state.images.dniF.blob.size) : "—"],
       ["f.dniB", state.images.dniB ? "✓ " + fmtSize(state.images.dniB.blob.size) : "—"],
       ["c.sign", state.sig ? "✓" : "—"]
-    ];
+    ]);
   }
   // Review step: rows grouped into cards, each with an "Edit" shortcut back to its step.
   var SUMMARY_GROUPS = [
     ["g.personal", 1, ["f.name", "f.email", "f.cuit", "f.dni"]],
     ["g.location", 1, ["f.prov", "f.city"]],
-    ["g.work", 1, ["f.device", "f.model", "f.strap", "f.hours", "f.role"]],
+    ["g.work", 1, ["f.device", "f.model", "f.ios", "f.strap", "f.hours"]],
     ["g.docs", 1, ["f.dniF", "f.dniB"]],
     ["reg.s2", 2, ["c.sign"]]
   ];
@@ -316,6 +364,7 @@
       head.appendChild(h); head.appendChild(edit); card.appendChild(head);
       var dl = document.createElement("dl");
       g[2].forEach(function (k) {
+        if (!(k in rows)) return;
         var dt = document.createElement("dt"); dt.textContent = T(k);
         var dd = document.createElement("dd");
         if (k === "c.sign" && state.sig) {
@@ -380,13 +429,14 @@
     summaryRows().forEach(function (r) {
       var label = ES[r[0]] || r[0];
       var v = r[1];
-      if (r[0] === "f.role") v = d.rol;
       if (r[0] === "f.device") v = d.dispositivo;
+      if (r[0] === "f.ios") v = d.ios;
       if (r[0] === "f.strap") v = d.vincha;
       if (r[0] === "f.dniF" || r[0] === "f.dniB") v = state.images[r[0].slice(2)] ? "adjunta (" + fmtSize(state.images[r[0].slice(2)].blob.size) + ")" : "-";
       if (r[0] === "c.sign") v = state.sig ? "sí (ver sección 3)" : "-";
       text(label + ": " + v, { size: 10 });
     });
+    text("Rol: Grabador POV (video en primera persona)", { size: 10 });
     text("Idioma de la interfaz: " + (window.SEVOR ? window.SEVOR.lang() : "es"), { size: 10 });
     y += 4;
 
@@ -458,15 +508,17 @@
       var pdf = await buildPDF();
       var next = new URL("gracias.html", location.href).href;
       var fields = [
-        ["_subject", "Nuevo registro SEVOR Data - " + d.name],
+        ["_subject", "Nuevo registro SEVOR Data \u2013 " + d.name],
         ["_template", "table"],
         ["_captcha", "false"],
         ["_next", next],
         ["_honey", ""],
         ["_autoresponse", T("th.title") + ". " + T("th.lead")],
         ["Nombre y apellido", d.name], ["email", d.email], ["CUIT", formatCUIT(d.cuit)], ["DNI", d.dni],
-        ["Provincia", d.provincia], ["Ciudad", d.ciudad], ["Dispositivo", d.dispositivo], ["Modelo", d.modelo],
-        ["Vincha o soporte de cabeza", d.vincha], ["Horas por semana", d.horas], ["Rol", d.rol],
+        ["Provincia", d.provincia], ["Ciudad", d.ciudad], ["Rol", d.rol],
+        ["Celular (familia)", d.dispositivo], ["Modelo exacto", d.modelo], ["Celular compatible", "Sí"],
+        ["iOS 17.4 o posterior", d.ios || "No aplica (Android)"],
+        ["Tiene vincha de cabeza", d.vincha === "Sí" ? "Sí" : "No (debe conseguirla antes de grabar)"], ["Horas por semana", d.horas],
         ["Contrato aceptado", "Sí"], ["Consentimiento Ley 25.326", "Sí"],
         ["Fecha y hora (UTC)", new Date().toISOString()], ["Idioma", window.SEVOR ? window.SEVOR.lang() : "es"]
       ];
@@ -546,6 +598,22 @@
         if (state.errors[k] && el.type !== "file") setErr(k, null);
       });
     });
+    // Phone family → iOS checkbox; vincha "No" → note
+    function syncPhone() {
+      var iphone = isIphone(val("dispositivo"));
+      document.getElementById("ios-field").hidden = !iphone;
+      if (!iphone) setErr("ios", null);
+    }
+    $("#dispositivo").addEventListener("change", function () {
+      syncPhone();
+      if (state.errors.modelo && val("modelo")) setErr("modelo", null);
+    });
+    $("#ios").addEventListener("change", function () { if (this.checked) setErr("ios", null); });
+    $$('input[name="vincha"]').forEach(function (r) {
+      r.addEventListener("change", function () { $("#strap-note").hidden = radio("vincha") !== "No"; });
+    });
+    syncPhone();
+
     // Format CUIT as digits only
     $("#cuit").addEventListener("blur", function () { this.value = digits(this.value); });
     $("#dni").addEventListener("blur", function () { this.value = digits(this.value); });
