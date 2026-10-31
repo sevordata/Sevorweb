@@ -866,3 +866,5 @@ p { text-wrap: pretty; }
 .related h2 { font: 500 11px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: var(--sp-2); }
 .related ul { list-style: none; padding: 0; display: grid; gap: .625rem; }
 .related a { color: var(--celeste-ink); text-decoration: underline; text-underline-offset: 3px; }
+.faq-grid .faq { grid-column: 6 / span 7; min-width: 0; }
+@media (max-width: 1023px) { .faq-grid .faq { grid-column: 1 / -1; } }
