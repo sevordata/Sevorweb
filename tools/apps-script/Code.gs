@@ -119,7 +119,9 @@ function finish_(b) {
   var s = meta.summary || {};
   var estado = meta.ko ? 'DESCARTE AUTOMÁTICO' : (meta.passed ? 'APROBADO (preliminar)' : 'NO APROBADO (preliminar)');
   var rows = Object.keys(s).filter(function (k) { return k.charAt(0) !== '_'; }).map(function (k) {
-    return '<tr><th align="left" style="padding:6px 10px;border-bottom:1px solid #eee;vertical-align:top">' + esc_(k) + '</th><td style="padding:6px 10px;border-bottom:1px solid #eee">' + esc_(s[k]) + '</td></tr>';
+    var v = String(s[k] == null ? '' : s[k]);
+    var cell = /^mailto:/.test(v) ? '<a href="' + esc_(v) + '">Rechazar: abrir email ya escrito</a>' : /^https:\/\//.test(v) ? '<a href="' + esc_(v) + '">' + esc_(v) + '</a>' : esc_(v);
+    return '<tr><th align="left" style="padding:6px 10px;border-bottom:1px solid #eee;vertical-align:top">' + esc_(k) + '</th><td style="padding:6px 10px;border-bottom:1px solid #eee">' + cell + '</td></tr>';
   }).join('');
   var html =
     '<div style="font-family:Arial,sans-serif;font-size:14px;color:#111">' +
@@ -127,7 +129,9 @@ function finish_(b) {
     '<p><b>Filtro automático:</b> ' + esc_(estado) + ' · ' + esc_(meta.pct) + '% · duración ' + esc_(meta.durationSec) + ' s' + (meta.capped ? ' (cortada a los 12 min)' : '') + '</p>' +
     (videoUrl ? '<p><b>Video (Drive privado):</b> <a href="' + videoUrl + '">' + esc_(videoName) + '</a></p>' : '<p><b>Video:</b> no recibido</p>') +
     '<p><b>Respuestas (JSON):</b> <a href="' + jf.getUrl() + '">' + esc_(jf.getName()) + '</a></p>' +
-    (meta.approvalLink ? '<p style="padding:10px;background:#e6f0fa;border-radius:8px"><b>Si lo aprobás, reenviale este link para el registro y el contrato:</b><br><a href="' + meta.approvalLink + '">' + esc_(meta.approvalLink) + '</a><br>Código: <b>' + esc_(meta.approvalCode) + '</b></p>' : '') +
+    (meta.approvalLink ? '<p style="padding:10px;background:#e6f0fa;border-radius:8px"><b>Si lo aprobás, reenviale este link para el registro y el contrato:</b><br><a href="' + meta.approvalLink + '">' + esc_(meta.approvalLink) + '</a><br>Código: <b>' + esc_(meta.approvalCode) + '</b>' +
+      (meta.rejectLink ? '<br><br><b>Si no lo aprobás:</b> <a href="' + esc_(meta.rejectLink) + '" style="display:inline-block;padding:8px 14px;background:#b42318;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold">Rechazar</a> <span style="color:#555">(abre un email cordial ya escrito para el candidato)</span>' : '<br><br><span style="color:#555">Ya recibió por email el rechazo automático.</span>') +
+      '</p>' : '') +
     '<table style="border-collapse:collapse;font-size:13px">' + rows + '</table></div>';
   MailApp.sendEmail({
     to: NOTIFY_TO,
