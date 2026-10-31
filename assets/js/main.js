@@ -56,9 +56,9 @@
       });
     });
     var page = document.body.getAttribute("data-page");
-    var titleKey = { index: "meta.index.title", registro: "meta.reg.title", gracias: "meta.thanks.title" }[page];
+    var titleKey = { index: "meta.index.title", registro: "meta.reg.title", gracias: "meta.thanks.title", empresas: "meta.biz.title" }[page];
     if (titleKey) document.title = tp(titleKey);
-    var descKey = { index: "meta.index.desc", registro: "meta.reg.desc" }[page];
+    var descKey = { index: "meta.index.desc", registro: "meta.reg.desc", empresas: "meta.biz.desc" }[page];
     if (descKey) {
       var md = document.querySelector('meta[name="description"]');
       if (md) md.setAttribute("content", tp(descKey));

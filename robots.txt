@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /gracias.html
 
 Sitemap: https://sevordata.dev.ar/sitemap.xml

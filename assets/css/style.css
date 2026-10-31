@@ -823,3 +823,46 @@ p { text-wrap: pretty; }
   .site-header, .site-footer, .hero-visual, .actions { display: none !important; }
   body { background: #fff; }
 }
+
+/* 10. FAQ, guides & articles (2026-10-30) -------------------------------- */
+.faq { display: grid; border-top: 1px solid var(--ink); }
+.faq details { border-bottom: var(--hairline); }
+.faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: var(--sp-2); align-items: baseline; padding: var(--sp-3) 0; font: 600 var(--fs-md)/1.35 var(--font-display); color: var(--ink); letter-spacing: -.012em; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font: 400 1.5rem/1 var(--font-sans); color: var(--ink-4); transition: transform var(--dur-2) var(--ease-out); flex: none; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq summary:focus-visible { outline: none; box-shadow: var(--focus); border-radius: var(--r-xs); }
+.faq .answer { padding: 0 0 var(--sp-3); color: var(--ink-2); line-height: 1.65; max-width: 46rem; display: grid; gap: .75rem; }
+.faq-grid .section-head { margin-bottom: var(--sp-4); }
+.guide-cards { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
+.guide-cards a { display: grid; gap: .75rem; align-content: start; height: 100%; padding: var(--sp-4) var(--sp-3); background: var(--surface); border: var(--hairline); border-radius: var(--r-lg); box-shadow: var(--sh-1); transition: box-shadow var(--dur-2), transform var(--dur-2) var(--ease-out); }
+.guide-cards a:hover { box-shadow: var(--sh-2); transform: translateY(-2px); }
+.guide-cards .num { font: 500 12px/1 var(--font-mono); color: var(--ink-4); letter-spacing: .06em; }
+.guide-cards h3 { font-size: var(--fs-lg); line-height: 1.25; letter-spacing: -.015em; }
+.guide-cards p { font-size: var(--fs-sm); color: var(--ink-3); line-height: 1.55; }
+.guide-cards .more { font-size: var(--fs-sm); color: var(--celeste-ink); font-weight: 500; }
+@media (max-width: 1023px) { .guide-cards { grid-template-columns: 1fr; } }
+.article-page { padding-block: clamp(2rem, 1rem + 3vw, 4rem) var(--sp-12); }
+.crumbs { font: 500 var(--fs-xs)/1.4 var(--font-mono); letter-spacing: .04em; color: var(--ink-4); margin-bottom: var(--sp-3); }
+.crumbs ol { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: .375rem; }
+.crumbs li + li::before { content: "/"; margin-right: .375rem; color: var(--line-strong); }
+.crumbs a { color: var(--ink-3); }
+.crumbs a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.article-head { display: grid; gap: var(--sp-2); max-width: 46rem; margin-bottom: var(--sp-6); }
+.article-head h1 { font-size: var(--fs-3xl); line-height: 1.06; letter-spacing: -.032em; }
+.article-head .meta { font: 500 var(--fs-xs)/1.4 var(--font-mono); letter-spacing: .04em; color: var(--ink-4); }
+.prose { max-width: 42rem; color: var(--ink-2); font-size: var(--fs-md); line-height: 1.7; }
+.prose > * + * { margin-top: 1.1em; }
+.prose h2 { font-size: var(--fs-2xl); line-height: 1.15; letter-spacing: -.025em; margin-top: 2em; }
+.prose h3 { font-size: var(--fs-lg); line-height: 1.3; margin-top: 1.6em; }
+.prose ul, .prose ol { padding-left: 1.25em; display: grid; gap: .45em; }
+.prose a:not(.btn) { color: var(--celeste-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.prose strong { color: var(--ink); font-weight: 600; }
+.prose .media { margin-block: 1.6em; }
+.prose figure figcaption { margin-top: .5rem; font-size: var(--fs-sm); color: var(--ink-3); }
+.article-cta { margin-top: var(--sp-8); }
+.article-cta .cta-band .cta-copy { grid-column: 1 / span 8; }
+.related { margin-top: var(--sp-8); max-width: 42rem; }
+.related h2 { font: 500 11px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: var(--sp-2); }
+.related ul { list-style: none; padding: 0; display: grid; gap: .625rem; }
+.related a { color: var(--celeste-ink); text-decoration: underline; text-underline-offset: 3px; }
