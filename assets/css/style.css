@@ -919,6 +919,23 @@ p { text-wrap: pretty; }
 .mira-mic { gap: .375rem; }
 .mira-mic svg { width: 16px; height: 16px; }
 .mira-mic.is-on { border-color: var(--danger); color: var(--danger); background: var(--danger-wash); }
+.mira-listen { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .75rem; padding: .5rem .625rem; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--paper); }
+.mira-listen[hidden] { display: none; }
+.mira-listen .mira-mic { flex: none; }
+.mira-listen-t { display: flex; align-items: center; gap: .5rem; margin: 0; min-width: 0; flex: 1; font-size: var(--fs-sm); color: var(--ink-3); }
+.mira-listen-dot { flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--line-strong); }
+.mira-listen.is-listening { border-color: #f1cfcb; background: var(--danger-wash); }
+.mira-listen.is-listening .mira-listen-t { color: var(--danger); font-weight: 600; }
+.mira-listen.is-listening .mira-listen-dot { background: #e5484d; box-shadow: 0 0 0 0 rgba(229, 72, 77, .5); animation: miraListen 1.2s ease-out infinite; }
+.mira-listen.is-listening .mira-mic { border-color: var(--danger); color: var(--danger); background: var(--surface); }
+@keyframes miraListen { 0% { box-shadow: 0 0 0 0 rgba(229, 72, 77, .55); } 70% { box-shadow: 0 0 0 10px rgba(229, 72, 77, 0); } 100% { box-shadow: 0 0 0 0 rgba(229, 72, 77, 0); } }
+@media (prefers-reduced-motion: reduce) { .mira-listen.is-listening .mira-listen-dot { animation: none; } }
+.mira-heard { margin: -.25rem 0 0; font-style: italic; overflow-wrap: anywhere; }
+.mira-heard[hidden], .mira-picked[hidden] { display: none; }
+.mira-opt.is-voice span { border-color: var(--celeste-ink); background: var(--celeste-wash); box-shadow: 0 0 0 2px var(--celeste-ink); animation: miraPick .6s var(--ease-out); }
+@keyframes miraPick { 0% { transform: scale(.98); } 60% { transform: scale(1.01); } 100% { transform: none; } }
+.mira-picked { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .25rem .75rem; padding: .5rem .5rem .5rem .875rem; border-radius: var(--r-md); background: var(--celeste-wash); border: 1px solid #c8dcf0; color: #183f62; font-size: var(--fs-sm); overflow-wrap: anywhere; }
+.mira-picked span { min-width: 0; flex: 1 1 12rem; }
 .mira-actions { display: flex; align-items: center; gap: .75rem; margin-top: var(--sp-1); }
 .mira-actions .spacer { flex: 1; }
 .mira-result { display: grid; gap: var(--sp-2); }
