@@ -466,6 +466,19 @@
     text("Huella SHA-256 del texto del contrato: " + hash, { size: 8.5 });
     text("Dispositivo: " + navigator.userAgent, { size: 7.5, lh: 3.8 });
 
+    // Firma del COMITENTE (rúbrica "DV" ya incluida en el contrato).
+    if (window.SEVOR_CONTRACT.comitenteOk && window.SEVOR_CONTRACT.comitenteOk()) {
+      y += 4;
+      text("4. Firma del comitente", { bold: true, size: 12, lh: 6.5 });
+      try {
+        var cs = await window.SEVOR_CONTRACT.comitenteSigPNG(), csw = 50, csh = csw / cs.ratio;
+        need(csh + 4);
+        doc.addImage(cs.dataUrl, "PNG", M, y, csw, csh);
+        y += csh + 2;
+      } catch (e) { text("[firma DV]", { size: 9.6 }); }
+      text("Aclaración: " + CFG.COMITENTE_TITULAR + ", por SEVOR Data", { size: 9.6 });
+    }
+
     var pages = doc.getNumberOfPages();
     for (var i = 1; i <= pages; i++) {
       doc.setPage(i); doc.setFontSize(8); doc.setTextColor(120);

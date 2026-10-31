@@ -5,6 +5,12 @@
   var I18N = window.SEVOR_I18N || {};
   var LANGS = CFG.LANGS || ["es", "en", "pt", "it", "fr", "de"];
   var STORE_KEY = "sevor_lang";
+  var CONSENT_KEY = "sevor_cookies";
+  /* Consentimiento de almacenamiento. Lo esencial (estado de la entrevista, código de aprobación)
+     siempre funciona; "functional" = recordar idioma y voz silenciada. */
+  function consentGet() { try { return JSON.parse(localStorage.getItem(CONSENT_KEY) || "null"); } catch (e) { return null; } }
+  function consentAllows(cat) { var c = consentGet(); if (cat === "essential") return true; return !!(c && c[cat]); }
+  window.SEVOR_CONSENT = { get: consentGet, allows: consentAllows };
 
   /* Small inline SVG flags (20×14). Emoji flags render inconsistently across OSes. */
   var FLAGS = {
@@ -75,7 +81,7 @@
   }
 
   function setLang(lang) {
-    try { localStorage.setItem(STORE_KEY, lang); } catch (e) { /* private mode */ }
+    try { if (consentAllows("functional")) localStorage.setItem(STORE_KEY, lang); } catch (e) { /* private mode */ }
     apply(lang);
   }
 
@@ -171,6 +177,43 @@
     if (y) y.textContent = new Date().getFullYear();
   }
 
+
+  function cookieBar() {
+    if (consentGet()) return;
+    var bar = document.createElement("div");
+    bar.className = "cookie-bar";
+    bar.setAttribute("role", "region");
+    bar.setAttribute("aria-label", "Aviso de cookies");
+    bar.setAttribute("lang", "es-AR");
+    bar.innerHTML =
+      '<p>Usamos solo almacenamiento <strong>esencial</strong> en tu navegador (por ejemplo, el estado de la entrevista) y, si aceptás, guardamos tus preferencias de idioma y voz. No usamos cookies publicitarias ni de análisis. <a class="link" href="/legal/cookies.html">Política de Cookies</a>.</p>' +
+      '<div class="cookie-prefs" hidden>' +
+      '<label class="check"><input type="checkbox" checked disabled><span><strong>Esenciales</strong> (siempre activas): entrevista y acceso al registro.</span></label>' +
+      '<label class="check"><input type="checkbox" data-c="functional"><span><strong>Preferencias</strong>: recordar idioma y voz silenciada.</span></label>' +
+      "</div>" +
+      '<div class="cookie-actions">' +
+      '<button type="button" class="btn btn-primary btn-sm" data-act="accept">Aceptar</button>' +
+      '<button type="button" class="btn btn-secondary btn-sm" data-act="reject">Rechazar no esenciales</button>' +
+      '<button type="button" class="btn btn-quiet btn-sm" data-act="config">Configurar</button>' +
+      "</div>";
+    function save(functional) {
+      try { localStorage.setItem(CONSENT_KEY, JSON.stringify({ v: 1, essential: true, functional: !!functional, ts: new Date().toISOString() })); } catch (e) {}
+      if (!functional) { try { localStorage.removeItem(STORE_KEY); localStorage.removeItem("sevor_mira_mute"); } catch (e) {} }
+      bar.remove();
+    }
+    bar.addEventListener("click", function (ev) {
+      var b = ev.target.closest("button"); if (!b) return;
+      var act = b.getAttribute("data-act");
+      if (act === "accept") save(true);
+      else if (act === "reject") save(false);
+      else if (act === "config") {
+        var p = bar.querySelector(".cookie-prefs");
+        if (p.hidden) { p.hidden = false; b.textContent = "Guardar selección"; b.setAttribute("data-act", "save"); }
+      } else if (act === "save") save(bar.querySelector('[data-c="functional"]').checked);
+    });
+    document.body.appendChild(bar);
+  }
+
   window.SEVOR = { t: tp, rich: rich, setLang: setLang, lang: function () { return current; } };
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -180,5 +223,6 @@
     header();
     mobileMenu();
     mailLinks();
+    cookieBar();
   });
 })();

@@ -118,6 +118,41 @@
         <p class="lead" data-i18n="reg.lead">Completá tus datos, leé y firmá el contrato, y envialo. Toma unos 10 minutos.</p>
       </header>
 
+      <!-- Gate: el registro (contrato) se habilita solo con el link de aprobación que envía SEVOR Data (?codigo=MIRA-XXXXXX) -->
+      <section class="mira-gate" id="mira-gate" hidden aria-labelledby="mira-gate-t">
+        <div class="mira-gate-row">
+          <div class="mira-avatar" aria-hidden="true"><span>M</span></div>
+          <div>
+            <p class="eyebrow">Paso 1 · Entrevista</p>
+            <h2 id="mira-gate-t">Primero, hacé la entrevista con Mirá</h2>
+          </div>
+        </div>
+        <p class="muted">El registro y el contrato se habilitan después de la entrevista online (10 preguntas cortas, por video, gratis). El responsable de SEVOR Data revisa cada entrevista y, si tu postulación avanza, te enviamos por email el link para registrarte.</p>
+        <p class="small muted" id="mira-gate-bad" hidden>El código del link no es válido. Revisá que hayas abierto el link completo que te enviamos por email.</p>
+        <div class="cta-row"><a class="btn btn-primary btn-lg" href="/entrevista.html">Hacer la entrevista<svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+      </section>
+      <script src="/assets/js/mira-code.js"></script>
+      <script>
+        (function () {
+          var C = window.SEVOR_MIRA_CODE, K = "sevor_mira_codigo", ok = false, bad = false, q = null, stored = null;
+          try { q = new URLSearchParams(location.search).get("codigo"); } catch (e) {}
+          try { stored = localStorage.getItem(K) || sessionStorage.getItem(K); } catch (e) {}
+          if (C && q) {
+            if (C.isValid(q)) {
+              ok = true;
+              var v = C.normalize(q);
+              try { localStorage.setItem(K, v); sessionStorage.setItem(K, v); localStorage.setItem("sevor_mira_ok", JSON.stringify({ ts: Date.now(), code: v })); } catch (e) {}
+            } else { bad = true; }
+          }
+          if (!ok && C && stored && C.isValid(stored)) ok = true;
+          if (!ok) {
+            document.getElementById("main").classList.add("reg-gated");
+            document.getElementById("mira-gate").hidden = false;
+            if (bad) document.getElementById("mira-gate-bad").hidden = false;
+          }
+        })();
+      </script>
+
       <div class="grid-12 reg-layout">
         <div class="reg-main">
           <div class="form-card">
@@ -235,7 +270,7 @@
                         <label class="choice"><input type="radio" name="vincha" value="No"><span data-i18n="no">No</span></label>
                       </div>
                       <span class="err" data-err="vincha"></span>
-                      <p class="callout is-warn" id="strap-note" style="margin-top:var(--sp-2)" hidden><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.2 17.6 16H2.4z"/><path d="M10 8v3.6M10 13.8h.01"/></svg><span data-i18n="strap.no">Vas a necesitar una vincha antes de grabar: sostiene el celular a la altura de la frente, inclinado hacia tus manos. Corre por tu cuenta.</span></p>
+                      <p class="callout is-warn" id="strap-note" style="margin-top:var(--sp-2)" hidden><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.2 17.6 16H2.4z"/><path d="M10 8v3.6M10 13.8h.01"/></svg><span data-i18n="strap.no">Vas a necesitar una vincha antes de grabar: sostiene el celular en horizontal a la altura de la frente, inclinado hacia tus manos. Corre por tu cuenta.</span></p>
                     </fieldset>
                     <div class="field">
                       <label for="horas" data-i18n="f.hours">Horas por semana disponibles</label>
@@ -321,6 +356,7 @@
                 <div class="summary-groups" id="summary"></div>
                 <label class="check"><input type="checkbox" id="privacy"><span data-i18n="s3.privacy">Acepto que SEVOR Data trate mis datos personales…</span></label>
                 <span class="err" data-err="privacy"></span>
+                <p class="small muted" style="margin-top:var(--sp-1);padding-left:2rem">Leé la <a class="link" href="/legal/privacidad.html" target="_blank" rel="noopener">Política de Privacidad</a> y los <a class="link" href="/legal/terminos.html" target="_blank" rel="noopener">Términos y Condiciones</a>.</p>
                 <p class="callout" style="margin-top:var(--sp-3)"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="12" height="8.5" rx="2"/><path d="M7 9V6.5a3 3 0 0 1 6 0V9"/></svg><span data-i18n="s3.note">Generamos en tu dispositivo un PDF…</span></p>
                 <p class="status" id="status" role="status" aria-live="polite"></p>
                 <div class="actions">
@@ -378,6 +414,7 @@
             <li><a href="/#como-funciona" data-i18n="footer.how">Cómo funciona</a></li>
             <li><a href="/#requisitos" data-i18n="nav.req">Requisitos</a></li>
             <li><a href="/#preguntas" data-i18n="footer.faq">Preguntas frecuentes</a></li>
+            <li><a href="/entrevista.html" data-i18n="footer.interview">Entrevista online</a></li>
             <li><a href="/registro.html" data-i18n="footer.register">Registro de contratistas</a></li>
           </ul>
         </nav>
@@ -400,7 +437,7 @@
         </nav>
       </div>
       <div class="foot-bottom">
-        <span>© <span id="year">2026</span> SEVOR Data. <span data-i18n="footer.rights">Todos los derechos reservados.</span></span>
+        <span class="legal-links">© <span id="year">2026</span> SEVOR Data · <a href="/legal/terminos.html">Términos</a> · <a href="/legal/privacidad.html">Privacidad</a> · <a href="/legal/cookies.html">Cookies</a> · <a href="/legal/aviso-legal.html">Aviso legal</a></span>
         <a class="to-top" href="#top" data-i18n="footer.top">Volver arriba</a>
       </div>
     </div>

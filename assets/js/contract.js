@@ -19,6 +19,27 @@
     return { d: parseInt(o.day, 10), m: parseInt(o.month, 10), y: parseInt(o.year, 10) };
   }
 
+  /* Firma del COMITENTE (Demian Niyen Velazco): rúbrica "DV" en SVG (solo trazos, sin fuentes). */
+  var SIG_DV_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 70" width="180" height="70"><g fill="none" stroke="#1b2a4a" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M30 14c-2 12-5 26-9 40"/><path d="M14 20c22-12 52-8 56 12 3 16-18 26-50 22-6-1-7-5-2-6"/><path d="M62 30c8-4 14-10 18-14 2 12 4 26 8 36 10-14 22-30 36-40 4-3 9-3 7 2"/><path d="M8 60c40-6 96-6 160-14"/></g></svg>';
+  var SIG_DV_URL = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(SIG_DV_SVG);
+  function comitenteOk(C) { return !!(C.COMITENTE_TITULAR && C.COMITENTE_TITULAR.indexOf("_") === -1); }
+  /* PNG de la firma del comitente para el PDF (jsPDF no acepta SVG). */
+  function comitenteSigPNG() {
+    return new Promise(function (res, rej) {
+      var img = new Image();
+      img.onload = function () {
+        try {
+          var w = 540, h = 210, c = document.createElement("canvas");
+          c.width = w; c.height = h;
+          c.getContext("2d").drawImage(img, 0, 0, w, h);
+          res({ dataUrl: c.toDataURL("image/png"), ratio: w / h });
+        } catch (e) { rej(e); }
+      };
+      img.onerror = rej;
+      img.src = SIG_DV_URL;
+    });
+  }
+
   /* data: {name, dni, cuit, domicilio, email, signatureDataUrl?} */
   function render(data) {
     var C = window.SEVOR_CONFIG || {};
@@ -51,7 +72,8 @@
     cl.forEach(function (c) { p.push("<h3>" + c[0] + "</h3><p>" + c[1] + "</p>"); });
     p.push("<p>&nbsp;</p><p>En prueba de conformidad, se firma en forma electrónica.</p><p>&nbsp;</p>");
     p.push('<p class="sigline"><strong>EL PRESTADOR</strong> — Firma: <span data-sig>' + sig + "</span>  Aclaración: " + f(data.name) + "  DNI: " + f(data.dni) + "</p>");
-    p.push("<p><strong>EL COMITENTE</strong> — Firma: ____________________  Aclaración: " + esc((C.COMITENTE_TITULAR && C.COMITENTE_TITULAR.indexOf("_") === -1) ? C.COMITENTE_TITULAR : "____________________") + ", por SEVOR Data</p>");
+    var csig = comitenteOk(C) ? '<img class="sig-comitente" src="' + SIG_DV_URL + '" alt="Firma de ' + esc(C.COMITENTE_TITULAR) + ' (DV)">' : "____________________";
+    p.push('<p class="sigline"><strong>EL COMITENTE</strong> — Firma: <span data-sig-comitente>' + csig + "</span>  Aclaración: " + esc(comitenteOk(C) ? C.COMITENTE_TITULAR : "____________________") + ", por SEVOR Data</p>");
     return p.join("\n");
   }
 
@@ -60,12 +82,12 @@
     var out = [];
     container.querySelectorAll("h2, h3, p").forEach(function (el) {
       var clone = el.cloneNode(true);
-      clone.querySelectorAll("img").forEach(function (img) { img.replaceWith("[firma electrónica — ver al pie]"); });
+      clone.querySelectorAll("img").forEach(function (img) { img.replaceWith(img.classList.contains("sig-comitente") ? "[firma DV del comitente — ver al pie]" : "[firma electrónica — ver al pie]"); });
       var txt = clone.textContent.replace(/\u00a0/g, " ").replace(/\s+/g, " ").trim();
       out.push({ type: el.tagName.toLowerCase(), text: txt });
     });
     return out;
   }
 
-  window.SEVOR_CONTRACT = { render: render, blocks: blocks, todayAR: todayAR };
+  window.SEVOR_CONTRACT = { render: render, blocks: blocks, todayAR: todayAR, comitenteSigPNG: comitenteSigPNG, comitenteSigUrl: SIG_DV_URL, comitenteOk: function () { return comitenteOk(window.SEVOR_CONFIG || {}); } };
 })();

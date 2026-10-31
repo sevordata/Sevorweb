@@ -69,8 +69,8 @@ window.SEVOR_I18N.es = {
   "qa.6.d": "El material original no se revende ni se entrega a otras empresas.",
   "why.kicker": "Por qué Argentina",
   "why.title": "Talento real, contextos reales, [[en tu horario]]",
-  "why.1.t": "Contratistas en todo el país",
-  "why.1.d": "Personas de distintas provincias, hogares y oficios, que suman variedad real a cada lote.",
+  "why.1.t": "Red de contratistas en crecimiento en Argentina",
+  "why.1.d": "Una red que estamos armando con personas de distintos hogares y oficios, para sumar variedad real a cada lote.",
   "why.2.t": "Escenarios latinoamericanos",
   "why.2.d": "Cocinas, casas, herramientas y objetos reales de la región: diversidad que escasea en los datasets.",
   "why.3.t": "UTC−3, en sintonía con EE. UU.",
@@ -311,8 +311,8 @@ window.SEVOR_I18N.en = {
   "qa.6.d": "Original footage is never resold or handed to other companies.",
   "why.kicker": "Why Argentina",
   "why.title": "Real talent, real settings, [[on your hours]]",
-  "why.1.t": "Contractors nationwide",
-  "why.1.d": "People from different provinces, homes and trades, adding real variety to every batch.",
+  "why.1.t": "A growing contractor network in Argentina",
+  "why.1.d": "A network we are building with people from different homes and trades, to add real variety to every batch.",
   "why.2.t": "Latin American settings",
   "why.2.d": "Real kitchens, homes, tools and objects from the region: diversity that most datasets lack.",
   "why.3.t": "UTC−3, in sync with the US",
@@ -553,8 +553,8 @@ window.SEVOR_I18N.pt = {
   "qa.6.d": "O material original não é revendido nem entregue a outras empresas.",
   "why.kicker": "Por que a Argentina",
   "why.title": "Talento real, contextos reais, [[no seu horário]]",
-  "why.1.t": "Prestadores em todo o país",
-  "why.1.d": "Pessoas de diferentes províncias, casas e ofícios, que trazem variedade real a cada lote.",
+  "why.1.t": "Rede de prestadores em crescimento na Argentina",
+  "why.1.d": "Uma rede que estamos montando com pessoas de diferentes casas e ofícios, para trazer variedade real a cada lote.",
   "why.2.t": "Cenários latino-americanos",
   "why.2.d": "Cozinhas, casas, ferramentas e objetos reais da região: uma diversidade rara nos datasets.",
   "why.3.t": "UTC−3, em sintonia com os EUA",
@@ -795,8 +795,8 @@ window.SEVOR_I18N.it = {
   "qa.6.d": "Il materiale originale non viene rivenduto né ceduto ad altre aziende.",
   "why.kicker": "Perché l'Argentina",
   "why.title": "Talento reale, contesti reali, [[nei tuoi orari]]",
-  "why.1.t": "Collaboratori in tutto il Paese",
-  "why.1.d": "Persone di diverse province, case e mestieri, che portano varietà reale in ogni lotto.",
+  "why.1.t": "Una rete di collaboratori in crescita in Argentina",
+  "why.1.d": "Una rete che stiamo costruendo con persone di case e mestieri diversi, per portare varietà reale in ogni lotto.",
   "why.2.t": "Ambienti latinoamericani",
   "why.2.d": "Cucine, case, attrezzi e oggetti reali della regione: una varietà rara nei dataset.",
   "why.3.t": "UTC−3, in sintonia con gli USA",
@@ -1037,8 +1037,8 @@ window.SEVOR_I18N.fr = {
   "qa.6.d": "Les images originales ne sont jamais revendues ni cédées à d'autres entreprises.",
   "why.kicker": "Pourquoi l'Argentine",
   "why.title": "De vrais talents, de vrais contextes, [[à vos horaires]]",
-  "why.1.t": "Des prestataires dans tout le pays",
-  "why.1.d": "Des personnes de différentes provinces, foyers et métiers, qui apportent une vraie variété à chaque lot.",
+  "why.1.t": "Un réseau de prestataires en croissance en Argentine",
+  "why.1.d": "Un réseau que nous construisons avec des personnes de foyers et de métiers différents, pour apporter une vraie variété à chaque lot.",
   "why.2.t": "Décors latino-américains",
   "why.2.d": "Cuisines, maisons, outils et objets réels de la région : une diversité rare dans les datasets.",
   "why.3.t": "UTC−3, en phase avec les États-Unis",
@@ -1279,8 +1279,8 @@ window.SEVOR_I18N.de = {
   "qa.6.d": "Originalmaterial wird nie weiterverkauft oder an andere Unternehmen gegeben.",
   "why.kicker": "Warum Argentinien",
   "why.title": "Echte Talente, echte Umgebungen, [[zu Ihren Zeiten]]",
-  "why.1.t": "Auftragnehmer im ganzen Land",
-  "why.1.d": "Menschen aus verschiedenen Provinzen, Haushalten und Berufen – echte Vielfalt in jeder Charge.",
+  "why.1.t": "Ein wachsendes Auftragnehmer-Netzwerk in Argentinien",
+  "why.1.d": "Ein Netzwerk, das wir mit Menschen aus verschiedenen Haushalten und Berufen aufbauen – für echte Vielfalt in jeder Charge.",
   "why.2.t": "Lateinamerikanische Umgebungen",
   "why.2.d": "Echte Küchen, Wohnungen, Werkzeuge und Gegenstände der Region: Vielfalt, die in Datensätzen selten ist.",
   "why.3.t": "UTC−3, im Takt mit den USA",
@@ -1642,6 +1642,80 @@ window.SEVOR_I18N.de = {
       "biz.eyebrow": "Für KI- und Robotikunternehmen",
       "biz.title": "Egozentrische POV-Videos, [[aufgenommen in Argentinien.]]",
       "biz.lead": "Wir sind ein neues argentinisches Team, das Auftragnehmer koordiniert, die Haushalts- und Outdoor-Aufgaben in der Ich-Perspektive aufnehmen, mit dem Handy am Kopfband und sichtbaren Händen. Individuelle Spezifikation, kostenlose Probe und wachsende Kapazität."
+    }
+  };
+  Object.keys(add).forEach(function (l) { I[l] = I[l] || {}; Object.keys(add[l]).forEach(function (k) { I[l][k] = add[l][k]; }); });
+})(window.SEVOR_I18N);
+
+/* 2026-10-30 Entrevista "Mirá": footer link. */
+(function (I) {
+  var add = {
+    es: { "footer.interview": "Entrevista online" },
+    en: { "footer.interview": "Online interview" },
+    pt: { "footer.interview": "Entrevista online" },
+    it: { "footer.interview": "Colloquio online" },
+    fr: { "footer.interview": "Entretien en ligne" },
+    de: { "footer.interview": "Online-Interview" }
+  };
+  Object.keys(add).forEach(function (l) { I[l] = I[l] || {}; Object.keys(add[l]).forEach(function (k) { I[l][k] = add[l][k]; }); });
+})(window.SEVOR_I18N);
+
+/* 2026-10-31 Nuevas fotos: celular en HORIZONTAL en la vincha, manos de frente. */
+(function (I) {
+  var add = {
+    es: {
+      "req.4.d": "Sostiene el celular en horizontal a la altura de la frente, inclinado hacia tus manos para que se vean de frente. Es obligatoria y corre por cuenta del contratista.",
+      "strap.no": "Vas a necesitar una vincha antes de grabar: sostiene el celular en horizontal a la altura de la frente, inclinado hacia tus manos. Corre por tu cuenta.",
+      "how.2.d": "Un celular compatible y una vincha que lo sostenga en horizontal a la altura de la frente.",
+      "srv.1.b1": "Celular compatible en vincha, en horizontal a la altura de la frente",
+      "img.kitchen": "Vista en primera persona de unas manos, vistas de frente, cortando un tomate sobre una tabla de madera en la cocina",
+      "img.laundry": "Vista en primera persona de unas manos, vistas de frente, doblando una remera sobre una mesa de madera",
+      "img.mount": "Persona con el celular montado en horizontal en una vincha de cabeza, a la altura de la frente"
+    },
+    en: {
+      "req.4.d": "Holds the phone in landscape at forehead level, angled toward your hands so they are seen from the front. It is required and provided by the contractor.",
+      "strap.no": "You will need a head mount before recording: it holds the phone in landscape at forehead level, angled toward your hands. It is at your own cost.",
+      "how.2.d": "A supported phone and a head mount that holds it in landscape at forehead level.",
+      "srv.1.b1": "Supported phone on a head mount, in landscape at forehead level",
+      "img.kitchen": "First-person view of hands, seen from the front, slicing a tomato on a wooden board in a kitchen",
+      "img.laundry": "First-person view of hands, seen from the front, folding a T-shirt on a wooden table",
+      "img.mount": "Person wearing a head strap with the phone mounted in landscape at forehead level"
+    },
+    pt: {
+      "req.4.d": "Segura o celular na horizontal na altura da testa, inclinado para as suas mãos, que aparecem de frente. É obrigatória e fica por conta do prestador.",
+      "strap.no": "Você vai precisar de uma faixa de cabeça antes de gravar: ela segura o celular na horizontal na altura da testa, inclinado para as suas mãos. Fica por sua conta.",
+      "how.2.d": "Um celular compatível e uma faixa que o segure na horizontal na altura da testa.",
+      "srv.1.b1": "Celular compatível em faixa de cabeça, na horizontal na altura da testa",
+      "img.kitchen": "Vista em primeira pessoa de mãos, vistas de frente, cortando um tomate sobre uma tábua de madeira na cozinha",
+      "img.laundry": "Vista em primeira pessoa de mãos, vistas de frente, dobrando uma camiseta sobre uma mesa de madeira",
+      "img.mount": "Pessoa com o celular preso na horizontal em uma faixa de cabeça, na altura da testa"
+    },
+    it: {
+      "req.4.d": "Tiene il cellulare in orizzontale all'altezza della fronte, inclinato verso le mani, che si vedono di fronte. È obbligatoria e a carico del collaboratore.",
+      "strap.no": "Ti servirà una fascia da testa prima di registrare: tiene il cellulare in orizzontale all'altezza della fronte, inclinato verso le mani. È a tuo carico.",
+      "how.2.d": "Un cellulare compatibile e una fascia che lo tenga in orizzontale all'altezza della fronte.",
+      "srv.1.b1": "Cellulare compatibile su fascia da testa, in orizzontale all'altezza della fronte",
+      "img.kitchen": "Vista in prima persona di mani, viste di fronte, che tagliano un pomodoro su un tagliere di legno in cucina",
+      "img.laundry": "Vista in prima persona di mani, viste di fronte, che piegano una maglietta su un tavolo di legno",
+      "img.mount": "Persona con il cellulare montato in orizzontale su una fascia da testa, all'altezza della fronte"
+    },
+    fr: {
+      "req.4.d": "Il tient le téléphone à l'horizontale à hauteur du front, incliné vers vos mains, visibles de face. Il est obligatoire et à la charge du prestataire.",
+      "strap.no": "Il vous faudra un bandeau de tête avant de filmer : il tient le téléphone à l'horizontale à hauteur du front, incliné vers vos mains. Il est à votre charge.",
+      "how.2.d": "Un téléphone compatible et un bandeau qui le maintient à l'horizontale au niveau du front.",
+      "srv.1.b1": "Téléphone compatible sur bandeau, à l'horizontale à hauteur du front",
+      "img.kitchen": "Vue à la première personne de mains, vues de face, coupant une tomate sur une planche en bois dans une cuisine",
+      "img.laundry": "Vue à la première personne de mains, vues de face, pliant un t-shirt sur une table en bois",
+      "img.mount": "Personne portant un bandeau avec le téléphone fixé à l'horizontale à hauteur du front"
+    },
+    de: {
+      "req.4.d": "Hält das Handy im Querformat auf Stirnhöhe, zu deinen Händen geneigt, die von vorne zu sehen sind. Sie ist Pflicht und wird vom Auftragnehmer gestellt.",
+      "strap.no": "Vor dem Filmen brauchst du eine Kopfhalterung: Sie hält das Handy im Querformat auf Stirnhöhe, zu deinen Händen geneigt. Die Kosten trägst du.",
+      "how.2.d": "Ein kompatibles Handy und ein Kopfband, das es im Querformat auf Stirnhöhe hält.",
+      "srv.1.b1": "Kompatibles Handy an Kopfhalterung, im Querformat auf Stirnhöhe",
+      "img.kitchen": "Ich-Perspektive: Hände, von vorne gesehen, schneiden eine Tomate auf einem Holzbrett in der Küche",
+      "img.laundry": "Ich-Perspektive: Hände, von vorne gesehen, falten ein T-Shirt auf einem Holztisch",
+      "img.mount": "Person mit Kopfband, das Handy im Querformat auf Stirnhöhe montiert"
     }
   };
   Object.keys(add).forEach(function (l) { I[l] = I[l] || {}; Object.keys(add[l]).forEach(function (k) { I[l][k] = add[l][k]; }); });

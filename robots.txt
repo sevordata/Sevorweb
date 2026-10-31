@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /tools/
 
 Sitemap: https://sevordata.dev.ar/sitemap.xml
