@@ -12,7 +12,7 @@
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
-  var state = { step: 1, images: { dniF: null, dniB: null }, sig: null, errors: {} };
+  var state = { step: 1, images: { dniF: null, dniB: null, selfie: null }, sig: null, errors: {} };
 
   /* ---------- validation helpers ---------- */
   function digits(v) { return String(v || "").replace(/\D/g, ""); }
@@ -122,7 +122,7 @@
     } else setErr("ios", null);
     req("vincha", d.vincha);
     req("horas", d.horas, function (v) { var n = Number(v); return n >= 1 && n <= 80 && Math.floor(n) === n ? null : "err.hours"; });
-    ["dniF", "dniB"].forEach(function (k) {
+    ["dniF", "dniB", "selfie"].forEach(function (k) {
       if (!state.images[k]) { setErr(k, state.errors[k] === "err.img" ? "err.img" : "err.required"); ok = false; }
       else setErr(k, null);
     });
@@ -338,6 +338,7 @@
       ["f.strap", d.vincha === "Sí" ? T("yes") : T("no")], ["f.hours", d.horas],
       ["f.dniF", state.images.dniF ? "✓ " + fmtSize(state.images.dniF.blob.size) : "—"],
       ["f.dniB", state.images.dniB ? "✓ " + fmtSize(state.images.dniB.blob.size) : "—"],
+      ["f.selfie", state.images.selfie ? "✓ " + fmtSize(state.images.selfie.blob.size) : "—"],
       ["c.sign", state.sig ? "✓" : "—"]
     ]);
   }
@@ -346,7 +347,7 @@
     ["g.personal", 1, ["f.name", "f.email", "f.cuit", "f.dni"]],
     ["g.location", 1, ["f.prov", "f.city"]],
     ["g.work", 1, ["f.device", "f.model", "f.ios", "f.strap", "f.hours"]],
-    ["g.docs", 1, ["f.dniF", "f.dniB"]],
+    ["g.docs", 1, ["f.dniF", "f.dniB", "f.selfie"]],
     ["reg.s2", 2, ["c.sign"]]
   ];
   function renderSummary() {
@@ -432,7 +433,7 @@
       if (r[0] === "f.device") v = d.dispositivo;
       if (r[0] === "f.ios") v = d.ios;
       if (r[0] === "f.strap") v = d.vincha;
-      if (r[0] === "f.dniF" || r[0] === "f.dniB") v = state.images[r[0].slice(2)] ? "adjunta (" + fmtSize(state.images[r[0].slice(2)].blob.size) + ")" : "-";
+      if (r[0] === "f.dniF" || r[0] === "f.dniB" || r[0] === "f.selfie") v = state.images[r[0].slice(2)] ? "adjunta (" + fmtSize(state.images[r[0].slice(2)].blob.size) + ")" : "-";
       if (r[0] === "c.sign") v = state.sig ? "sí (ver sección 3)" : "-";
       text(label + ": " + v, { size: 10 });
     });
@@ -521,7 +522,7 @@
       var pdf = await buildPDF();
       var next = new URL("gracias.html", location.href).href;
       var fields = [
-        ["_subject", "Nuevo registro SEVOR Data \u2013 " + d.name],
+        ["_subject", "Registro para revisar SEVOR Data \u2013 " + d.name],
         ["_template", "table"],
         ["_captcha", "false"],
         ["_next", next],
@@ -532,13 +533,14 @@
         ["Celular (familia)", d.dispositivo], ["Modelo exacto", d.modelo], ["Celular compatible", "Sí"],
         ["iOS 17.4 o posterior", d.ios || "No aplica (Android)"],
         ["Tiene vincha de cabeza", d.vincha === "Sí" ? "Sí" : "No (debe conseguirla antes de grabar)"], ["Horas por semana", d.horas],
-        ["Contrato aceptado", "Sí"], ["Consentimiento Ley 25.326", "Sí"],
+        ["Contrato aceptado", "Sí"], ["Consentimiento Ley 25.326", "Sí"], ["Estado", "PENDIENTE DE REVISIÓN: responder por email aprobado o rechazado"],
         ["Fecha y hora (UTC)", new Date().toISOString()], ["Idioma", window.SEVOR ? window.SEVOR.lang() : "es"]
       ];
       var files = [
         ["contrato_pdf", new File([pdf.blob], pdf.filename, { type: "application/pdf" })],
         ["dni_frente", new File([state.images.dniF.blob], "dni-frente.jpg", { type: "image/jpeg" })],
-        ["dni_dorso", new File([state.images.dniB.blob], "dni-dorso.jpg", { type: "image/jpeg" })]
+        ["dni_dorso", new File([state.images.dniB.blob], "dni-dorso.jpg", { type: "image/jpeg" })],
+        ["selfie_con_dni", new File([state.images.selfie.blob], "selfie-con-dni.jpg", { type: "image/jpeg" })]
       ];
       var endpoint = CFG.FORM_ENDPOINT || ("https://formsubmit.co/" + (CFG.EMAIL || ""));
 
@@ -590,7 +592,7 @@
     var sel = document.getElementById("provincia");
     PROVINCIAS.forEach(function (p) { var o = document.createElement("option"); o.value = p; o.textContent = p; sel.appendChild(o); });
 
-    bindFile("dniF"); bindFile("dniB");
+    bindFile("dniF"); bindFile("dniB"); bindFile("selfie");
     pad = SigPad(document.getElementById("sigpad"));
     pad.onchange = function () {
       var signed = !pad.isEmpty();
@@ -650,7 +652,7 @@
       refreshErrors();
       stepCount();
       if (state.step === 3) renderSummary();
-      ["dniF", "dniB"].forEach(function (k) {
+      ["dniF", "dniB", "selfie"].forEach(function (k) {
         var st = $('[data-status="' + k + '"]');
         if (state.images[k] && st) st.textContent = "✓ " + T("st.ready") + " · " + fmtSize(state.images[k].blob.size);
       });

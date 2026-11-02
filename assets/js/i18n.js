@@ -1720,3 +1720,50 @@ window.SEVOR_I18N.de = {
   };
   Object.keys(add).forEach(function (l) { I[l] = I[l] || {}; Object.keys(add[l]).forEach(function (k) { I[l][k] = add[l][k]; }); });
 })(window.SEVOR_I18N);
+
+/* 2026-11-02 Registro directo sin entrevista: selfie con DNI y aprobación manual por email. Foto de cocina: cortar un tomate. */
+(function (I) {
+  var add = {
+    es: {
+      "home.cap": "Referencia de grabación POV: cortar un tomate en una cocina.",
+      "hero.media.cap": "Referencia de captura POV: cortar un tomate en una cocina doméstica.",
+      "how.1.d": "Completás tus datos, cargás tu DNI y una selfie, y firmás el contrato online. Lo revisamos y te avisamos. Es gratis.",
+      "reg.lead": "Completá tus datos, sacate una selfie con tu DNI y firmá el contrato. Lo revisamos y te avisamos por email si quedó aprobado. Toma unos 10 minutos.",
+      "g.docs.d": "Fotos nítidas del frente y del dorso, y una selfie sosteniendo el DNI. Las comprimimos en tu dispositivo a menos de 1 MB.",
+      "f.selfie": "Selfie sosteniendo tu DNI", "f.selfie.cta": "Sacar selfie",
+      "f.selfie.h": "Tu cara y el frente del DNI tienen que verse claros, sin anteojos de sol ni gorra. La comparamos a mano con la foto del DNI.",
+      "aside.1": "Tu DNI a mano (frente y dorso) para sacarte una selfie con él",
+      "th.title": "¡Gracias! Recibimos tu registro",
+      "th.lead": "Vamos a revisar tus datos, tu DNI y tu selfie. Dentro de los 10 días hábiles te escribimos por email para avisarte si tu registro quedó aprobado o no.",
+      "s3.note": "Generamos en tu dispositivo un PDF con tus datos, el contrato y tu firma, y lo enviamos junto con las fotos del DNI y la selfie a través de FormSubmit. El contrato entra en vigencia cuando te confirmamos la aprobación por email."
+    },
+    en: {
+      "home.cap": "POV recording reference: slicing a tomato in a kitchen.",
+      "hero.media.cap": "POV capture reference: slicing a tomato in a home kitchen.",
+      "how.1.d": "Enter your details, upload your ID and a selfie, and sign the agreement online. We review it and let you know. It's free.",
+      "reg.lead": "Enter your details, take a selfie holding your DNI and sign the agreement. We review it and email you whether it was approved. It takes about 10 minutes.",
+      "g.docs.d": "Sharp photos of the front and back, plus a selfie holding your DNI. We compress them on your device to under 1 MB.",
+      "f.selfie": "Selfie holding your DNI", "f.selfie.cta": "Take selfie",
+      "f.selfie.h": "Your face and the front of the DNI must be clear, with no sunglasses or cap. We compare it by hand with the DNI photo.",
+      "aside.1": "Your DNI at hand (front and back) to take a selfie with it",
+      "th.lead": "We will review your details, DNI and selfie. Within 10 business days we will email you whether your registration was approved.",
+      "s3.note": "We generate a PDF on your device with your details, the agreement and your signature, and send it with your DNI photos and selfie through FormSubmit. The agreement takes effect when we confirm approval by email."
+    },
+    pt: {
+      "home.cap": "Referência de gravação POV: cortar um tomate em uma cozinha.",
+      "hero.media.cap": "Referência de captura POV: cortar um tomate em uma cozinha doméstica.",
+      "how.1.d": "Preencha seus dados, envie seu DNI e uma selfie e assine o contrato online. Revisamos e avisamos você. É grátis.",
+      "reg.lead": "Preencha seus dados, tire uma selfie segurando o DNI e assine o contrato. Revisamos e avisamos por e-mail se foi aprovado. Leva cerca de 10 minutos.",
+      "g.docs.d": "Fotos nítidas da frente e do verso, e uma selfie segurando o DNI. Comprimimos no seu dispositivo para menos de 1 MB.",
+      "f.selfie": "Selfie segurando seu DNI", "f.selfie.cta": "Tirar selfie",
+      "f.selfie.h": "Seu rosto e a frente do DNI precisam aparecer nítidos, sem óculos escuros nem boné. Comparamos manualmente com a foto do DNI.",
+      "aside.1": "Seu DNI em mãos (frente e verso) para tirar uma selfie com ele",
+      "th.lead": "Vamos revisar seus dados, seu DNI e sua selfie. Em até 10 dias úteis avisaremos por e-mail se seu cadastro foi aprovado.",
+      "s3.note": "Geramos no seu dispositivo um PDF com seus dados, o contrato e sua assinatura, e o enviamos com as fotos do DNI e a selfie pelo FormSubmit. O contrato entra em vigor quando confirmarmos a aprovação por e-mail."
+    },
+    it: { "home.cap": "Riferimento di registrazione POV: tagliare un pomodoro in cucina.", "hero.media.cap": "Riferimento di acquisizione POV: tagliare un pomodoro in una cucina di casa.", "f.selfie": "Selfie con il tuo DNI", "f.selfie.cta": "Scatta selfie", "f.selfie.h": "Il viso e il fronte del DNI devono essere ben visibili, senza occhiali da sole né cappello. Lo confrontiamo a mano con la foto del DNI." },
+    fr: { "home.cap": "Référence de tournage POV : couper une tomate en cuisine.", "hero.media.cap": "Référence de capture POV : couper une tomate dans une cuisine domestique.", "f.selfie": "Selfie en tenant votre DNI", "f.selfie.cta": "Prendre un selfie", "f.selfie.h": "Votre visage et le recto du DNI doivent être nets, sans lunettes de soleil ni casquette. Nous le comparons à la main avec la photo du DNI." },
+    de: { "home.cap": "POV-Aufnahmereferenz: eine Tomate in der Küche schneiden.", "hero.media.cap": "POV-Aufnahmereferenz: eine Tomate in einer Haushaltsküche schneiden.", "f.selfie": "Selfie mit deinem DNI", "f.selfie.cta": "Selfie aufnehmen", "f.selfie.h": "Gesicht und Vorderseite des DNI müssen gut sichtbar sein, ohne Sonnenbrille oder Kappe. Wir vergleichen es von Hand mit dem DNI-Foto." }
+  };
+  Object.keys(add).forEach(function (l) { I[l] = I[l] || {}; Object.keys(add[l]).forEach(function (k) { I[l][k] = add[l][k]; }); });
+})(window.SEVOR_I18N);

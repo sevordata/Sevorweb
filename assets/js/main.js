@@ -6,7 +6,7 @@
   var LANGS = CFG.LANGS || ["es", "en", "pt", "it", "fr", "de"];
   var STORE_KEY = "sevor_lang";
   var CONSENT_KEY = "sevor_cookies";
-  /* Consentimiento de almacenamiento. Lo esencial (estado de la entrevista, código de aprobación)
+  /* Consentimiento de almacenamiento. Lo esencial (elección de cookies)
      siempre funciona; "functional" = recordar idioma y voz silenciada. */
   function consentGet() { try { return JSON.parse(localStorage.getItem(CONSENT_KEY) || "null"); } catch (e) { return null; } }
   function consentAllows(cat) { var c = consentGet(); if (cat === "essential") return true; return !!(c && c[cat]); }
@@ -186,9 +186,9 @@
     bar.setAttribute("aria-label", "Aviso de cookies");
     bar.setAttribute("lang", "es-AR");
     bar.innerHTML =
-      '<p>Usamos solo almacenamiento <strong>esencial</strong> en tu navegador (por ejemplo, el estado de la entrevista) y, si aceptás, guardamos tus preferencias de idioma y voz. No usamos cookies publicitarias ni de análisis. <a class="link" href="/legal/cookies.html">Política de Cookies</a>.</p>' +
+      '<p>Usamos solo almacenamiento <strong>esencial</strong> en tu navegador (por ejemplo, tu elección en este aviso) y, si aceptás, guardamos tu preferencia de idioma. No usamos cookies publicitarias ni de análisis. <a class="link" href="/legal/cookies.html">Política de Cookies</a>.</p>' +
       '<div class="cookie-prefs" hidden>' +
-      '<label class="check"><input type="checkbox" checked disabled><span><strong>Esenciales</strong> (siempre activas): entrevista y acceso al registro.</span></label>' +
+      '<label class="check"><input type="checkbox" checked disabled><span><strong>Esenciales</strong> (siempre activas): funcionamiento del sitio y del registro.</span></label>' +
       '<label class="check"><input type="checkbox" data-c="functional"><span><strong>Preferencias</strong>: recordar idioma y voz silenciada.</span></label>' +
       "</div>" +
       '<div class="cookie-actions">' +
