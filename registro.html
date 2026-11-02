@@ -115,43 +115,8 @@
       <header class="reg-head">
         <p class="eyebrow" data-i18n="reg.kicker">Registro</p>
         <h1 data-i18n="reg.title">Registro para grabar videos para IA</h1>
-        <p class="lead" data-i18n="reg.lead">Completá tus datos, leé y firmá el contrato, y envialo. Toma unos 10 minutos.</p>
+        <p class="lead" data-i18n="reg.lead">Completá tus datos, sacate una selfie con tu DNI y firmá el contrato. Lo revisamos y te avisamos por email si quedó aprobado. Toma unos 10 minutos.</p>
       </header>
-
-      <!-- Gate: el registro (contrato) se habilita solo con el link de aprobación que envía SEVOR Data (?codigo=MIRA-XXXXXX) -->
-      <section class="mira-gate" id="mira-gate" hidden aria-labelledby="mira-gate-t">
-        <div class="mira-gate-row">
-          <div class="mira-avatar" aria-hidden="true"><span>M</span></div>
-          <div>
-            <p class="eyebrow">Paso 1 · Entrevista</p>
-            <h2 id="mira-gate-t">Primero, hacé la entrevista con Mirá</h2>
-          </div>
-        </div>
-        <p class="muted">El registro y el contrato se habilitan después de la entrevista online (10 preguntas cortas, por video, gratis). El responsable de SEVOR Data revisa cada entrevista y, si tu postulación avanza, te enviamos por email el link para registrarte.</p>
-        <p class="small muted" id="mira-gate-bad" hidden>El código del link no es válido. Revisá que hayas abierto el link completo que te enviamos por email.</p>
-        <div class="cta-row"><a class="btn btn-primary btn-lg" href="/entrevista.html">Hacer la entrevista<svg class="arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
-      </section>
-      <script src="/assets/js/mira-code.js"></script>
-      <script>
-        (function () {
-          var C = window.SEVOR_MIRA_CODE, K = "sevor_mira_codigo", ok = false, bad = false, q = null, stored = null;
-          try { q = new URLSearchParams(location.search).get("codigo"); } catch (e) {}
-          try { stored = localStorage.getItem(K) || sessionStorage.getItem(K); } catch (e) {}
-          if (C && q) {
-            if (C.isValid(q)) {
-              ok = true;
-              var v = C.normalize(q);
-              try { localStorage.setItem(K, v); sessionStorage.setItem(K, v); localStorage.setItem("sevor_mira_ok", JSON.stringify({ ts: Date.now(), code: v })); } catch (e) {}
-            } else { bad = true; }
-          }
-          if (!ok && C && stored && C.isValid(stored)) ok = true;
-          if (!ok) {
-            document.getElementById("main").classList.add("reg-gated");
-            document.getElementById("mira-gate").hidden = false;
-            if (bad) document.getElementById("mira-gate-bad").hidden = false;
-          }
-        })();
-      </script>
 
       <div class="grid-12 reg-layout">
         <div class="reg-main">
@@ -282,7 +247,7 @@
                 </div>
 
                 <div class="group">
-                  <div class="group-head"><h3 data-i18n="g.docs">Documento de identidad</h3><p data-i18n="g.docs.d">Fotos nítidas del frente y del dorso. Las comprimimos en tu dispositivo a menos de 1 MB.</p></div>
+                  <div class="group-head"><h3 data-i18n="g.docs">Documento de identidad</h3><p data-i18n="g.docs.d">Fotos nítidas del frente y del dorso, y una selfie sosteniendo el DNI. Las comprimimos en tu dispositivo a menos de 1 MB.</p></div>
                   <div class="fields">
                     <div class="field">
                       <span class="label-like" id="dniF-l" data-i18n="f.dniF">Foto del DNI (frente)</span>
@@ -303,6 +268,17 @@
                         <span class="pick" aria-hidden="true"><span class="when-empty" data-i18n="f.file.cta">Elegir foto</span><span class="when-has" data-i18n="f.file.change">Cambiar foto</span></span>
                       </label>
                       <span class="err" data-err="dniB"></span>
+                    </div>
+                    <div class="field full">
+                      <span class="label-like" id="selfie-l" data-i18n="f.selfie">Selfie sosteniendo tu DNI</span>
+                      <label class="drop" data-drop="selfie">
+                        <input type="file" id="selfie" accept="image/*" capture="user" required aria-labelledby="selfie-l" aria-describedby="h-selfie">
+                        <span class="thumb" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.8-3.4 3-5.2 5.5-5.2s4.7 1.8 5.5 5.2"/><rect x="14.5" y="11" width="6.5" height="4.5" rx="1"/></svg></span>
+                        <span class="meta"><b data-i18n="f.file.types">JPG o PNG</b><span data-status="selfie" aria-live="polite"></span></span>
+                        <span class="pick" aria-hidden="true"><span class="when-empty" data-i18n="f.selfie.cta">Sacar selfie</span><span class="when-has" data-i18n="f.file.change">Cambiar foto</span></span>
+                      </label>
+                      <span class="hint" id="h-selfie" data-i18n="f.selfie.h">Tu cara y el frente del DNI tienen que verse claros, sin anteojos de sol ni gorra. La comparamos a mano con la foto del DNI.</span>
+                      <span class="err" data-err="selfie"></span>
                     </div>
                   </div>
                 </div>
@@ -377,7 +353,7 @@
           <div class="aside-card">
             <h2 id="aside-t" data-i18n="aside.title">Antes de empezar</h2>
             <ul class="ticks">
-              <li data-i18n="aside.1">Tu DNI a mano (frente y dorso)</li>
+              <li data-i18n="aside.1">Tu DNI a mano (frente y dorso) para sacarte una selfie con él</li>
               <li data-i18n="aside.2">Tu CUIT</li>
               <li data-i18n="aside.3">Unos 10 minutos</li>
             </ul>
@@ -414,7 +390,6 @@
             <li><a href="/#como-funciona" data-i18n="footer.how">Cómo funciona</a></li>
             <li><a href="/#requisitos" data-i18n="nav.req">Requisitos</a></li>
             <li><a href="/#preguntas" data-i18n="footer.faq">Preguntas frecuentes</a></li>
-            <li><a href="/entrevista.html" data-i18n="footer.interview">Entrevista online</a></li>
             <li><a href="/registro.html" data-i18n="footer.register">Registro de contratistas</a></li>
           </ul>
         </nav>
