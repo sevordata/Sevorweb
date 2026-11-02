@@ -9,7 +9,7 @@ window.SEVOR_CONFIG = {
   FORM_ENDPOINT: "https://formsubmit.co/contacto.sevor@gmail.com",
   // Comitente data shown in the contract (EL COMITENTE). Its "DV" signature is drawn by contract.js.
   COMITENTE_TITULAR: "Demian Niyen Velazco",
-  COMITENTE_CUIT: "______________",
+  COMITENTE_CUIT: "20-38952931-2",
   DEFAULT_LANG: "es",
   LANGS: ["es", "en", "pt", "it", "fr", "de"]
 };
